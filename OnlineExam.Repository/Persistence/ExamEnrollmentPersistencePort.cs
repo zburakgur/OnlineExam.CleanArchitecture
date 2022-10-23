@@ -15,6 +15,21 @@ namespace OnlineExam.Repository.Persistence
             this.questionRepository = questionRepository;
         }
 
+        public List<Question> GetQuestionListWithExamId(int examId)
+        {
+            return (from record in questionRepository.GetTable()
+                    where record.ExamId == examId
+                    select record).DefaultIfEmpty().ToList();
+        }
+
+        public List<Exam> GetExamList()
+        {
+            List<Exam> result =  (from record in examRepository.GetTable()
+                                  select record).DefaultIfEmpty().ToList();
+
+            return result;
+        }
+
         public int CreateExam(Exam exam)
         {
             if (exam == default)

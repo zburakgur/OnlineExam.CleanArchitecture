@@ -10,8 +10,19 @@
 
 <h1>@ViewData["Title"]</h1>
 
-<p>Use this page to manage exam list.</p>
-
+<div class="container">
+    <p>Use this page to manage exam list.</p>
+    <div id="pageBody" class="portlet box col-md-12 col-md-offset-0">
+        <div class="portlet-body">            
+            <div class="table-responsive">
+                    <table id="examTable" class="table table-striped table-bordered table-hover dataTable no-footer" role="grid" aria-describedby="sample_3_info"></table>
+            </div>
+            <div class="table-responsive">
+                    <table id="questionTable" class="table table-striped table-bordered table-hover dataTable no-footer" role="grid" aria-describedby="sample_3_info"></table>
+            </div>
+        </div>
+    </div>
+</div>
 
 @section scripts{        
     <script src="~/js/pages/examPage.js"></script>

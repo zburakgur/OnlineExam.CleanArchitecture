@@ -88,5 +88,21 @@ namespace OnlineExam.Application.UseCases.Tests
             Assert.AreNotEqual(result, default);
             Assert.AreNotEqual(result.Questions.Count, 0);
         }
+
+        [TestMethod()]
+        public void ShowExamListTest()
+        {
+            var result = _testClass.ShowExamList().Result;
+            Assert.AreNotEqual(result, default);
+            Assert.AreNotEqual(result.Count, 0);
+        }
+
+
+        [TestMethod()]
+        public void ShowQuestionListBelongToExamTest()
+        {
+            var m = _testClass.ShowQuestionListBelongToExam(1).Result;
+            Assert.AreNotEqual(_testClass.ShowQuestionListBelongToExam(1).Result.Count, 0);
+        }
     }
 }
