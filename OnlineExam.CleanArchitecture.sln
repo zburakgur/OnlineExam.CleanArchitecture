@@ -1,0 +1,61 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.3.32825.248
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "OnlineExam.Web", "Apps\OnlineExam.Web\OnlineExam.Web.csproj", "{6E474E4C-79CF-43DD-9AD7-265798F83DC1}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "OnlineExam.Api", "Apps\OnlineExam.Api\OnlineExam.Api.csproj", "{5FB7CEB1-C2F0-44CE-A87B-79782E2476D1}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "OnlineExam.Domain", "OnlineExam.Domain\OnlineExam.Domain.csproj", "{B7580DA7-EDC6-46B7-AF0E-6AEADC75B70A}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Infrastructure", "Infrastructure\Infrastructure.csproj", "{EEBEF3CC-76F1-4A4B-880E-94F8E8C01C8A}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "OnlineExam.Application", "OnlineExam.Application\OnlineExam.Application.csproj", "{A3B09630-5759-4F93-8363-9D411A74D74A}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "OnlineExam.Repository", "OnlineExam.Repository\OnlineExam.Repository.csproj", "{A23E207C-6645-4BF2-A04B-1328C0D1204C}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "OnlineExam.Api.Tests", "OnlineExam.Api.Tests\OnlineExam.Api.Tests.csproj", "{D9FC6D2C-A54D-4103-B753-B9C67FFA1D32}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{6E474E4C-79CF-43DD-9AD7-265798F83DC1}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{6E474E4C-79CF-43DD-9AD7-265798F83DC1}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{6E474E4C-79CF-43DD-9AD7-265798F83DC1}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{6E474E4C-79CF-43DD-9AD7-265798F83DC1}.Release|Any CPU.Build.0 = Release|Any CPU
+		{5FB7CEB1-C2F0-44CE-A87B-79782E2476D1}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{5FB7CEB1-C2F0-44CE-A87B-79782E2476D1}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{5FB7CEB1-C2F0-44CE-A87B-79782E2476D1}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{5FB7CEB1-C2F0-44CE-A87B-79782E2476D1}.Release|Any CPU.Build.0 = Release|Any CPU
+		{B7580DA7-EDC6-46B7-AF0E-6AEADC75B70A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{B7580DA7-EDC6-46B7-AF0E-6AEADC75B70A}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{B7580DA7-EDC6-46B7-AF0E-6AEADC75B70A}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{B7580DA7-EDC6-46B7-AF0E-6AEADC75B70A}.Release|Any CPU.Build.0 = Release|Any CPU
+		{EEBEF3CC-76F1-4A4B-880E-94F8E8C01C8A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{EEBEF3CC-76F1-4A4B-880E-94F8E8C01C8A}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{EEBEF3CC-76F1-4A4B-880E-94F8E8C01C8A}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{EEBEF3CC-76F1-4A4B-880E-94F8E8C01C8A}.Release|Any CPU.Build.0 = Release|Any CPU
+		{A3B09630-5759-4F93-8363-9D411A74D74A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{A3B09630-5759-4F93-8363-9D411A74D74A}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{A3B09630-5759-4F93-8363-9D411A74D74A}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{A3B09630-5759-4F93-8363-9D411A74D74A}.Release|Any CPU.Build.0 = Release|Any CPU
+		{A23E207C-6645-4BF2-A04B-1328C0D1204C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{A23E207C-6645-4BF2-A04B-1328C0D1204C}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{A23E207C-6645-4BF2-A04B-1328C0D1204C}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{A23E207C-6645-4BF2-A04B-1328C0D1204C}.Release|Any CPU.Build.0 = Release|Any CPU
+		{D9FC6D2C-A54D-4103-B753-B9C67FFA1D32}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{D9FC6D2C-A54D-4103-B753-B9C67FFA1D32}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{D9FC6D2C-A54D-4103-B753-B9C67FFA1D32}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{D9FC6D2C-A54D-4103-B753-B9C67FFA1D32}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {B552B2ED-097A-4F72-A881-C0AA8FA092E6}
+	EndGlobalSection
+EndGlobal

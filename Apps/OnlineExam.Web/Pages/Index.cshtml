@@ -1,0 +1,28 @@
+﻿@page
+@model IndexModel
+@{
+    ViewData["Title"] = "Exams Page";
+    Layout = "_Layout";
+}
+
+@section styles{
+    <link href="~/css/datatables.min.css" rel="stylesheet" />
+    <link href="~/css/datatable.css" rel="stylesheet" />
+}
+
+<h1>@ViewData["Title"]</h1>
+
+<p>Use this page to manage exam list.</p>
+
+
+@section scripts{
+    <script src="~/js/dataTables.buttons.min.js"></script>
+    <script src="~/js/jszip.min.js"></script>
+    <script src="~/js/buttons.html5.min.js"></script>
+    <script src="~/js/moment.js"></script>
+    <script src="~/js/datatable.js"></script>
+    <script>
+        var hizmet_no = @ViewBag.Data;
+    </script>
+    <script src="~/js/pages/examPage.js"></script>
+}
