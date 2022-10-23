@@ -25,6 +25,11 @@ namespace OnlineExam.Web.Controllers
             return Json(await httpHelper.GetAsync<ResponseData<List<Exam>>>($"Exam/GetExamList"));
         }
 
+        public async Task<JsonResult> GetExamListAvailableForStudent(int studentId)
+        {
+            return Json(await httpHelper.GetAsync<ResponseData<List<Exam>>>($"Exam/GetExamListAvailableForStudent?studentId={studentId}"));
+        }
+
         public async Task<JsonResult> GetQuestionList(string examCode)
         {            
             return Json(await httpHelper.GetAsync<ResponseData<List<Question>>>($"Exam/GetQuestionList?examCode={examCode}"));

@@ -7,5 +7,7 @@ namespace OnlineExam.Application.PersistencePorts
         int CreateAssignment(Assignment assignment);
 
         List<Assignment> GetAssignmentListWithStudentId(int studentId);
+
+        List<Exam> GetExamListNotAssignedToStudent(int studentId, string path);
     }
 }

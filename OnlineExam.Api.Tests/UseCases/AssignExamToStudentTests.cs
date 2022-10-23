@@ -4,6 +4,7 @@ using OnlineExam.Api.Tests.Framework;
 using OnlineExam.Domain.Entities;
 using OnlineExam.Domain.UseCases;
 using System;
+using OnlineExam.Api.Settings;
 
 namespace OnlineExam.Application.UseCases.Tests
 {
@@ -11,11 +12,13 @@ namespace OnlineExam.Application.UseCases.Tests
     public class AssignExamToStudentTests : TestClassBase
     {
         private IAssignExamToStudent _testClass;
+        private QuestionsPath _questPath;
 
         [TestInitialize]
         public void SetUp()
         {
             _testClass = _serviceProvider.GetService<IAssignExamToStudent>();
+            _questPath = _serviceProvider.GetService<QuestionsPath>();
         }
 
         [TestMethod()]
@@ -67,6 +70,12 @@ namespace OnlineExam.Application.UseCases.Tests
         public void ShowAssignmentBelongToStudentTest()
         {
             Assert.AreNotEqual(_testClass.ShowAssignmentBelongToStudent(1).Result.Count, 0);
+        }
+
+        [TestMethod()]
+        public void ShowExamListForStudentAssignmentTest()
+        {
+            Assert.AreEqual(_testClass.ShowExamListForStudentAssignment(2, _questPath.Path).Result.Count, 0);
         }
     }
 }

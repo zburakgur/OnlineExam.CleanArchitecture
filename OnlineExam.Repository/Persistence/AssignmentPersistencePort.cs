@@ -7,12 +7,15 @@ namespace OnlineExam.Repository.Persistence
     {
         private readonly IOnlineExamRepository<Student, int> studentRepository;
         private readonly IOnlineExamRepository<Assignment, int> assignmentRepository;
+        private readonly IExamEnrollmentPersistencePort examEnrollmentPersistencePort;
 
         public AssignmentPersistencePort(IOnlineExamRepository<Student, int> studentRepository,
-                                         IOnlineExamRepository<Assignment, int> assignmentRepository)
+                                         IOnlineExamRepository<Assignment, int> assignmentRepository,
+                                         IExamEnrollmentPersistencePort examEnrollmentPersistencePort)
         {
             this.studentRepository = studentRepository;
             this.assignmentRepository = assignmentRepository;
+            this.examEnrollmentPersistencePort = examEnrollmentPersistencePort;
         }
 
         public int CreateAssignment(Assignment assignment)
@@ -35,6 +38,10 @@ namespace OnlineExam.Repository.Persistence
             if (tmp != default)
                 throw new ArgumentException("CreateAssignment");
 
+            assignment.Score = 0;
+            assignment.Deadline = DateTime.Now.AddDays(7);
+            assignment.IsCompleted = false;
+
             return assignmentRepository.AddAsync(assignment).Result;
         }
 
@@ -52,6 +59,20 @@ namespace OnlineExam.Repository.Persistence
                     select record).ToList();
 
             return result;
+        }
+
+        public List<Exam> GetExamListNotAssignedToStudent(int studentId, string path)
+        {
+            List<Exam> examList = examEnrollmentPersistencePort.GetExamList(path);
+            List<Assignment> assignmentList = (from record in assignmentRepository.GetTable()
+                                               where record.StudentId == studentId
+                                               select record).ToList();
+
+            return (from exam in examList
+                    join assignment in assignmentList on exam.Code equals assignment.ExamCode into joinList
+                    from tmp in joinList.DefaultIfEmpty()
+                    where tmp == default
+                    select exam).ToList();
         }
     }
 }

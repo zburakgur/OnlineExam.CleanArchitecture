@@ -9,6 +9,8 @@ namespace OnlineExam.Domain.UseCases
 
         Task<int> CreateAssignment(Assignment assignment);
 
+        Task<List<Exam>> ShowExamListForStudentAssignment(int studentId, string path);
+
         void IsLinkValid(Assignment assignment);
 
         void CreateExamLink(Assignment assignment);

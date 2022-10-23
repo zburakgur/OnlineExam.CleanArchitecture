@@ -46,7 +46,7 @@ namespace OnlineExam.Api.Controllers
 
             try
             {
-                Assignment assignment = command.ToModel<CreateAssignmentCommand, Assignment>();
+                Assignment assignment = command.ToModel<CreateAssignmentCommand, Assignment>();                
                 assignment.Id = await assignExamToStudent.CreateAssignment(assignment);
 
                 response.Success = true;

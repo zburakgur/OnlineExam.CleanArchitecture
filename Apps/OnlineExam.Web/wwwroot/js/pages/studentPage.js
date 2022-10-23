@@ -69,8 +69,10 @@ var loadAssignments = function (student) {
     App.post('/Students/GetAssignmentList', { studentId: student.id }, function (result) {
         if (result.success) {
 
-            if (result.data.length == 0)
+            if (result.data.length == 0) {
                 App.showMessage('warning', 'No record', '');
+                assignmentTable.clearTable();
+            }
             else {
                 assignmentTable.loadList(result.data);
             }
@@ -126,18 +128,57 @@ var closeAssignmentModal = function () {
     $("#assignmentModal").modal("hide");
 }
 
-var showModalForAddAssignment = function () {
+var showModalForAddAssignment = function () {    
+    var selectedStudent = studentTable.getSelectedItem();
+    if (selectedStudent == null) {
+        App.showMessage('warning', 'You should select a student!', '');
+        return;
+    }
+
     $('#assignmentModal').modal("show");
 
     App.loading.start('#form-body');
-    App.post('/Exams/GetExamList', {}, function (result) {
+    App.post('/Exams/GetExamListAvailableForStudent', { studentId: selectedStudent.id}, function (result) {
         if (result.success) {
 
-            if (result.data.length == 0)
+            if (result.data.length == 0) {
                 App.showMessage('warning', 'No record', '');
+                examTable.clearTable();
+            }
             else {
                 examTable.loadList(result.data);
             }
+        }
+        else
+            App.showMessage('error', 'Operation fail.(' + result.message + ')', 'Error');
+        App.loading.end('#pageBody');
+    },
+    false);
+}
+
+var saveAssignmentModal = function () {
+    var selectedExam = examTable.getSelectedItem();
+    if (selectedExam == null) {
+        App.showMessage('warning', 'You should select an exam from the list!', '');
+        return;
+    }
+
+    var selectedStudent = studentTable.getSelectedItem();
+    if (selectedStudent == null) {
+        App.showMessage('warning', 'You should select a student!', '');
+        return;
+    }
+
+    var model = {
+        StudentId: selectedStudent.id,
+        ExamCode: selectedExam.code
+    }
+
+    App.loading.start('#form-body');
+    App.post('/Students/Assign', model, function (result) {
+        if (result.success) {
+            loadAssignments(selectedStudent);
+            closeAssignmentModal();
         }
         else
             App.showMessage('error', 'Operation fail.(' + result.message + ')', 'Error');

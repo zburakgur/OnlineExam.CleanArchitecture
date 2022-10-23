@@ -11,11 +11,15 @@ namespace OnlineExam.Api.Controllers
     public class ExamController : ControllerBase
     {
         private readonly IExamEnrollment examEnrollment;
+        private readonly IAssignExamToStudent assignExamToStudent;
         private readonly QuestionsPath _questPath;
 
-        public ExamController(IExamEnrollment examEnrollment, QuestionsPath _questPath)
+        public ExamController(IExamEnrollment examEnrollment,
+                              IAssignExamToStudent assignExamToStudent,
+                              QuestionsPath _questPath)
         {
             this.examEnrollment = examEnrollment;
+            this.assignExamToStudent = assignExamToStudent;
             this._questPath = _questPath;
         }
 
@@ -49,6 +53,26 @@ namespace OnlineExam.Api.Controllers
             {
                 response.Success = true;
                 response.Data = await examEnrollment.ShowExamList(_questPath.Path);
+            }
+            catch (Exception ex)
+            {
+                response.Success = false;
+                response.Message = ex.Message.ToString();
+            }
+
+            return new JsonResult(response);
+        }
+
+        [HttpGet]
+        [Route("GetExamListAvailableForStudent")]
+        public async Task<JsonResult> GetExamListAvailableForStudent(int studentId)
+        {
+            ResponseData<List<Exam>> response = new ResponseData<List<Exam>>();
+
+            try
+            {
+                response.Success = true;
+                response.Data = await assignExamToStudent.ShowExamListForStudentAssignment(studentId, _questPath.Path);
             }
             catch (Exception ex)
             {

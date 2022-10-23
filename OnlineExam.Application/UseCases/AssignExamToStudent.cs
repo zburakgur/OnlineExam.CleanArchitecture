@@ -23,6 +23,11 @@ namespace OnlineExam.Application.UseCases
             return assignmentPersistencePort.CreateAssignment(assignment);
         }
 
+        public async Task<List<Exam>> ShowExamListForStudentAssignment(int studentId, string path)
+        {
+            return assignmentPersistencePort.GetExamListNotAssignedToStudent(studentId, path);
+        }
+
         public void CompleteExam(Assignment assignment)
         {
             throw new NotImplementedException();

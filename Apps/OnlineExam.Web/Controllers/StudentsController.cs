@@ -30,6 +30,11 @@ namespace OnlineExam.Web.Controllers
             return Json(await httpHelper.GetAsync<ResponseData<List<Assignment>>>($"Assignment/GetAssignmentList?studentId={studentId}"));
         }
 
+        public async Task<JsonResult> Assign(Assignment assignment)
+        {
+            return Json(await httpHelper.Post<Assignment, ResponseData<Assignment>>($"Assignment/Assign", assignment));
+        }
+
         public IActionResult Index()
         {
             return View();
