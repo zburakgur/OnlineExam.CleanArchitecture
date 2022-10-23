@@ -8,7 +8,7 @@ namespace OnlineExam.Domain.Entities
 
         public int StudentId { get; set; }
 
-        public int ExamId { get; set; }
+        public string ExamCode { get; set; }
 
         public bool IsCompleted { get; set; }
 

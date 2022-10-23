@@ -8,6 +8,7 @@ using OnlineExam.Domain.UseCases;
 
 namespace OnlineExam.Api.Controllers
 {
+    [ApiController]
     [Route("api/[controller]")]
     public class StudentController : ControllerBase
     {

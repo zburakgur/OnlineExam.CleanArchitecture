@@ -8,14 +8,11 @@ const TableSettings = {
 }
 
 const ExamTableHeaders = {
-    id: { value: "Id", hidden: true },
-    code: "Code",
-    header: "Header"
+    code: "Exam Code"
 }
 
 const QuestionExamTableHeaders = {
-    id: { value: "Id", hidden: true },
-    examId: { value: "ExamId", hidden: true },
+    id: "Id",
     text: "Text",
     a: "A",
     b: "B",

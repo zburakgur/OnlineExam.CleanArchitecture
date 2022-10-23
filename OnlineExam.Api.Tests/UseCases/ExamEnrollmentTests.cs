@@ -26,16 +26,9 @@ namespace OnlineExam.Application.UseCases.Tests
         }
 
         [TestMethod()]
-        public void GetExamWithIdTest()
-        {
-            var result = _testClass.GetExamWithId(1).Result;
-            Assert.AreNotEqual(result, default);
-        }
-
-        [TestMethod()]
         public void ShowExamListTest()
         {
-            var result = _testClass.ShowExamList().Result;
+            var result = _testClass.ShowExamList(_questPath.Path).Result;
             Assert.AreNotEqual(result, default);
             Assert.AreNotEqual(result.Count, 0);
         }

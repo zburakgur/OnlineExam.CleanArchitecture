@@ -16,7 +16,6 @@ namespace OnlineExam.Repository
 
             modelBuilder.ApplyConfiguration(new AdminMap());
             modelBuilder.ApplyConfiguration(new StudentMap());
-            modelBuilder.ApplyConfiguration(new ExamMap());
             modelBuilder.ApplyConfiguration(new AnswerMap());
             modelBuilder.ApplyConfiguration(new AssignmentMap());
         }

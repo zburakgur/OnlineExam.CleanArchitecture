@@ -1,13 +1,7 @@
-﻿using OnlineExam.Domain.Entities.Base;
-
-namespace OnlineExam.Domain.Entities
+﻿namespace OnlineExam.Domain.Entities
 {
-    public class Exam : IEntityBase<int>
+    public class Exam
     {
-        public int Id { get; set; }
-
-        public string Code { get; set; }
-
-        public string Header { get; set; }       
+        public string Code { get; set; }      
     }
 }

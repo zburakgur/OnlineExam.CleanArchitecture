@@ -18,14 +18,9 @@ namespace OnlineExam.Application.UseCases
             this.examEnrollemtPersistencePort = examEnrollemtPersistencePort;
         }
 
-        public async Task<List<Exam>> ShowExamList()
+        public async Task<List<Exam>> ShowExamList(string path)
         {
-            return examEnrollemtPersistencePort.GetExamList();
-        }
-
-        public async Task<Exam> GetExamWithId(int id)
-        {
-            return examEnrollemtPersistencePort.GetExamWithId(id);
+            return examEnrollemtPersistencePort.GetExamList(path);
         }
     }
 }

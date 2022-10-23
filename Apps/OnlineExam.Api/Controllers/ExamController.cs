@@ -1,13 +1,12 @@
-﻿using Infrastructure.Extensions;
-using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Mvc;
 using OnlineExam.Api.Settings;
-using OnlineExam.Application.Commands;
 using OnlineExam.Application.Responses;
 using OnlineExam.Domain.Entities;
 using OnlineExam.Domain.UseCases;
 
 namespace OnlineExam.Api.Controllers
 {
+    [ApiController]
     [Route("api/[controller]")]
     public class ExamController : ControllerBase
     {
@@ -49,7 +48,7 @@ namespace OnlineExam.Api.Controllers
             try
             {
                 response.Success = true;
-                response.Data = await examEnrollment.ShowExamList();
+                response.Data = await examEnrollment.ShowExamList(_questPath.Path);
             }
             catch (Exception ex)
             {

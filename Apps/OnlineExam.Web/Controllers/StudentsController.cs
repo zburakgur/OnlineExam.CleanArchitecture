@@ -14,6 +14,12 @@ namespace OnlineExam.Web.Controllers
             this.httpHelper = httpHelper;
         }
 
+        [HttpPost]
+        public async Task<JsonResult> Add(Student student)
+        {
+            return Json(await httpHelper.Post<Student, ResponseData<Student>>($"Student/Add", student));
+        }
+
         public async Task<JsonResult> GetStudentList()
         {            
             return Json(await httpHelper.GetAsync<ResponseData<List<Student>>>($"Student/GetStudentList"));
@@ -21,7 +27,7 @@ namespace OnlineExam.Web.Controllers
 
         public async Task<JsonResult> GetAssignmentList(int studentId)
         {
-            return Json(await httpHelper.GetAsync<ResponseData<List<AssignmentBelongtoUser>>>($"Assignment/GetAssignmentList?studentId={studentId}"));
+            return Json(await httpHelper.GetAsync<ResponseData<List<Assignment>>>($"Assignment/GetAssignmentList?studentId={studentId}"));
         }
 
         public IActionResult Index()

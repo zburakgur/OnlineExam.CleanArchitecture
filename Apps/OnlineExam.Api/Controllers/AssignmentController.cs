@@ -2,47 +2,32 @@
 using Microsoft.AspNetCore.Mvc;
 using OnlineExam.Application.Commands;
 using OnlineExam.Application.Responses;
-using OnlineExam.Application.UseCases;
 using OnlineExam.Domain.Entities;
 using OnlineExam.Domain.UseCases;
-using System.Collections.Generic;
 
 namespace OnlineExam.Api.Controllers
 {
+    [ApiController]
     [Route("api/[controller]")]
     public class AssignmentController : ControllerBase
     {
         private readonly IAssignExamToStudent assignExamToStudent;
-        private readonly IExamEnrollment examEnrollment;
 
-        public AssignmentController(IAssignExamToStudent assignExamToStudent, 
-                                    IExamEnrollment examEnrollment)
+        public AssignmentController(IAssignExamToStudent assignExamToStudent)
         {
             this.assignExamToStudent = assignExamToStudent;
-            this.examEnrollment = examEnrollment;
         }
 
         [HttpGet]
         [Route("GetAssignmentList")]
         public async Task<JsonResult> GetAssignmentList(int studentId)
         {
-            ResponseData<List<AssignmentBelongtoUser>> response = new ResponseData<List<AssignmentBelongtoUser>>();
+            ResponseData<List<Assignment>> response = new ResponseData<List<Assignment>>();
 
             try
-            {
-                List<Assignment> assignments = await assignExamToStudent.ShowAssignmentBelongToStudent(studentId);
-                response.Data = new List<AssignmentBelongtoUser>();
-                
-                foreach(Assignment assignment in assignments)
-                {
-                    AssignmentBelongtoUser assignmentBelongtoUser = assignment.ToModel<Assignment, AssignmentBelongtoUser>();
-                    Exam exam = await examEnrollment.GetExamWithId(assignmentBelongtoUser.ExamId);
-                    assignmentBelongtoUser.Code = exam.Code;
-                    assignmentBelongtoUser.Header = exam.Header;
-                    response.Data.Add(assignmentBelongtoUser);
-                }
-                
+            {                
                 response.Success = true;
+                response.Data = await assignExamToStudent.ShowAssignmentBelongToStudent(studentId);
             }
             catch (Exception ex)
             {

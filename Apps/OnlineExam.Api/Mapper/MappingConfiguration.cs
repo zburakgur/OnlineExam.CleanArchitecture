@@ -17,7 +17,6 @@ namespace OnlineExam.Api.Mapper
                     cfg.CreateMap<CheckLoginCommand, Admin>();
                     cfg.CreateMap<CreateExamCommand, Exam>();
                     cfg.CreateMap<CreateAssignmentCommand, Assignment>();
-                    cfg.CreateMap<Assignment, AssignmentBelongtoUser>();
                 });
 
             return config;

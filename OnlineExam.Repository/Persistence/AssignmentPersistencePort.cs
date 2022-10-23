@@ -5,15 +5,12 @@ namespace OnlineExam.Repository.Persistence
 {
     public class AssignmentPersistencePort : IAssignmentPersistencePort
     {
-        private readonly IOnlineExamRepository<Exam, int> examRepository;
         private readonly IOnlineExamRepository<Student, int> studentRepository;
         private readonly IOnlineExamRepository<Assignment, int> assignmentRepository;
 
-        public AssignmentPersistencePort(IOnlineExamRepository<Exam, int> examRepository,
-                                         IOnlineExamRepository<Student, int> studentRepository,
+        public AssignmentPersistencePort(IOnlineExamRepository<Student, int> studentRepository,
                                          IOnlineExamRepository<Assignment, int> assignmentRepository)
         {
-            this.examRepository = examRepository;
             this.studentRepository = studentRepository;
             this.assignmentRepository = assignmentRepository;
         }
@@ -30,16 +27,9 @@ namespace OnlineExam.Repository.Persistence
             if (student == default)
                 throw new ArgumentException("CreateAssignment");
 
-            Exam exam = (from record in examRepository.GetTable()
-                         where record.Id == assignment.ExamId
-                         select record).FirstOrDefault();
-
-            if (exam == default)
-                throw new ArgumentException("CreateAssignment");
-
             Assignment tmp = (from record in assignmentRepository.GetTable()
                               where record.StudentId == assignment.StudentId &&
-                                    record.ExamId == assignment.ExamId
+                                    record.ExamCode == assignment.ExamCode
                               select record).FirstOrDefault();
 
             if (tmp != default)

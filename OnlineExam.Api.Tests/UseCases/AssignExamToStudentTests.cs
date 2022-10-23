@@ -24,7 +24,7 @@ namespace OnlineExam.Application.UseCases.Tests
             Assignment assignment = new Assignment()
             {
                 StudentId = 1,
-                ExamId = 1,
+                ExamCode = "EXAM_001",
                 IsCompleted = false,
                 Score = 0,
                 Deadline = DateTime.Now.AddDays(7),
@@ -39,7 +39,7 @@ namespace OnlineExam.Application.UseCases.Tests
             Assignment assignment = new Assignment()
             {
                 StudentId = 5555,
-                ExamId = 5555,
+                ExamCode = "EXAM_001",
                 IsCompleted = false,
                 Score = 0,
                 Deadline = DateTime.Now.AddDays(7),
@@ -54,7 +54,7 @@ namespace OnlineExam.Application.UseCases.Tests
             Assignment assignment = new Assignment()
             {
                 StudentId = 1,
-                ExamId = 1,
+                ExamCode = "EXAM_001",
                 IsCompleted = false,
                 Score = 0,
                 Deadline = DateTime.Now.AddDays(7),

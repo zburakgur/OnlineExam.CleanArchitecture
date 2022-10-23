@@ -7,8 +7,6 @@ namespace OnlineExam.Domain.UseCases
     {
         Task<List<Question>> ShowQuestionListBelongToExam(string examCode, string path);
 
-        Task<List<Exam>> ShowExamList();
-
-        Task<Exam> GetExamWithId(int id);
+        Task<List<Exam>> ShowExamList(string path);
     }
 }

@@ -17,7 +17,7 @@ namespace OnlineExam.Repository.Map
             // Properties
             builder.Property(t => t.Id).HasColumnName("ID").IsRequired();
             builder.Property(t => t.StudentId).HasColumnName("STUDENTID").IsRequired();
-            builder.Property(t => t.ExamId).HasColumnName("EXAMID").IsRequired();
+            builder.Property(t => t.ExamCode).HasColumnName("EXAMCODE").IsRequired();
             builder.Property(t => t.IsCompleted).HasColumnName("ISCOMPLETED").IsRequired();
             builder.Property(t => t.Score).HasColumnName("SCORE").IsRequired();
             builder.Property(t => t.CompletedDate).HasColumnName("COMPLETEDDATE");

@@ -7,8 +7,6 @@ namespace OnlineExam.Application.PersistencePorts
     {
         List<Question> GetQuestionListWithExamId(string examCode, string path);
 
-        List<Exam> GetExamList();
-
-        Exam GetExamWithId(int id);
+        List<Exam> GetExamList(string path);
     }
 }

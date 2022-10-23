@@ -6,16 +6,9 @@ namespace OnlineExam.Repository.Persistence
 {
     public class ExamEnrollmentPersistencePort : IExamEnrollmentPersistencePort
     {
-        private readonly IOnlineExamRepository<Exam, int> examRepository;
-
-        public ExamEnrollmentPersistencePort(IOnlineExamRepository<Exam, int> examRepository)
-        {
-            this.examRepository = examRepository;
-        }
-
         public List<Question> GetQuestionListWithExamId(string examCode, string path)
         {
-            var jsonData = System.IO.File.ReadAllText(path+examCode+".json");
+            var jsonData = System.IO.File.ReadAllText(path + "\\" + examCode+".json");
             if (string.IsNullOrWhiteSpace(jsonData))
                 throw new Exception("GetQuestionListWithExamId");
 
@@ -23,19 +16,21 @@ namespace OnlineExam.Repository.Persistence
             return result;
         }
 
-        public List<Exam> GetExamList()
+        public List<Exam> GetExamList(string path)
         {
-            List<Exam> result =  (from record in examRepository.GetTable()
-                                  select record).ToList();
+            DirectoryInfo d = new DirectoryInfo(path);
+            FileInfo[] Files = d.GetFiles("*.json");
+
+            List<Exam> result = new List<Exam>();
+            foreach (FileInfo file in Files)
+            {
+                result.Add(new Exam()
+                {
+                    Code = file.Name.Split(".")[0]
+                });
+            }
 
             return result;
-        }
-
-        public Exam GetExamWithId(int id)
-        {
-            return  (from record in examRepository.GetTable()
-                     where record.Id == id
-                     select record).FirstOrDefault();
         }
     }
 }
