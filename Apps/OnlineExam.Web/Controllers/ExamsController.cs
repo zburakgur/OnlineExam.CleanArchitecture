@@ -21,14 +21,12 @@ namespace OnlineExam.Web.Controllers
         }
 
         public async Task<JsonResult> GetExamList()
-        {
-            ViewBag.Current = "XdslUsage";
+        {            
             return Json(await httpHelper.GetAsync<ResponseData<List<Exam>>>($"Exam/GetExamList"));
         }
 
         public async Task<JsonResult> GetQuestionList(int examId)
-        {
-            ViewBag.Current = "XdslUsage";
+        {            
             return Json(await httpHelper.GetAsync<ResponseData<List<Question>>>($"Exam/GetQuestionList?examId={examId}"));
         }
     }

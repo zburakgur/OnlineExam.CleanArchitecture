@@ -1,6 +1,7 @@
 ﻿using AutoMapper;
 using Infrastructure.Mapper;
 using OnlineExam.Application.Commands;
+using OnlineExam.Application.Responses;
 using OnlineExam.Domain.Entities;
 
 namespace OnlineExam.Api.Mapper
@@ -15,7 +16,8 @@ namespace OnlineExam.Api.Mapper
                     cfg.CreateMap<CreateStudentCommand, Student>();
                     cfg.CreateMap<CheckLoginCommand, Admin>();
                     cfg.CreateMap<CreateExamCommand, Exam>();
-                    cfg.CreateMap<CreateAssignmentCommand, Assignment>();                    
+                    cfg.CreateMap<CreateAssignmentCommand, Assignment>();
+                    cfg.CreateMap<Assignment, AssignmentBelongtoUser>();
                 });
 
             return config;

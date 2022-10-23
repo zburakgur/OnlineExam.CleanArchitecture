@@ -1,4 +1,5 @@
-﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
+﻿using OnlineExam.Application.UseCases;
+using Microsoft.VisualStudio.TestTools.UnitTesting;
 using OnlineExam.Api.Tests.Framework;
 using OnlineExam.Domain.Entities;
 using OnlineExam.Domain.UseCases;
@@ -28,7 +29,7 @@ namespace OnlineExam.Application.UseCases.Tests
                 Score = 0,
                 Deadline = DateTime.Now.AddDays(7),
             };
-            
+
             Assert.AreNotEqual(_testClass.CreateAssignment(assignment), 0);
         }
 
@@ -43,7 +44,7 @@ namespace OnlineExam.Application.UseCases.Tests
                 Score = 0,
                 Deadline = DateTime.Now.AddDays(7),
             };
-            
+
             Assert.ThrowsException<ArgumentException>(() => _testClass.CreateAssignment(assignment));
         }
 
@@ -60,6 +61,12 @@ namespace OnlineExam.Application.UseCases.Tests
             };
 
             Assert.ThrowsException<ArgumentException>(() => _testClass.CreateAssignment(assignment));
+        }
+
+        [TestMethod()]
+        public void ShowAssignmentBelongToStudentTest()
+        {
+            Assert.AreNotEqual(_testClass.ShowAssignmentBelongToStudent(1).Result.Count, 0);
         }
     }
 }

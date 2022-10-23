@@ -19,13 +19,13 @@ namespace OnlineExam.Repository.Persistence
         {
             return (from record in questionRepository.GetTable()
                     where record.ExamId == examId
-                    select record).DefaultIfEmpty().ToList();
+                    select record).ToList();
         }
 
         public List<Exam> GetExamList()
         {
             List<Exam> result =  (from record in examRepository.GetTable()
-                                  select record).DefaultIfEmpty().ToList();
+                                  select record).ToList();
 
             return result;
         }
@@ -49,7 +49,7 @@ namespace OnlineExam.Repository.Persistence
 
             result.Questions = (from record in questionRepository.GetTable()
                                 where record.ExamId == result.Id
-                                select record).DefaultIfEmpty().ToList();
+                                select record).ToList();
 
             return result;
         }

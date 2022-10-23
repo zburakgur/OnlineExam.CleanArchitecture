@@ -45,5 +45,11 @@ namespace OnlineExam.Application.UseCases.Tests
 
             Assert.AreEqual(_testClass.CheckAdmin(admin).Result, true);
         }
+
+        [TestMethod()]
+        public void ShowStudentListTest()
+        {
+            Assert.AreNotEqual(_testClass.ShowStudentList().Result.Count, 0);
+        }
     }
 }

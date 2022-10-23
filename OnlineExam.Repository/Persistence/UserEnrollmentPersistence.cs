@@ -53,5 +53,11 @@ namespace OnlineExam.Repository.Persistence
 
             return studentRepository.AddAsync(student).Result;
         }
+
+        public List<Student> GetStudentList()
+        {
+            return (from record in studentRepository.GetTable()
+                    select record).ToList();
+        }
     }
 }

@@ -13,6 +13,11 @@ namespace OnlineExam.Application.UseCases
             this.assignmentPersistencePort = assignmentPersistencePort;
         }
 
+        public async Task<List<Assignment>> ShowAssignmentBelongToStudent(int studentId)
+        {
+            return assignmentPersistencePort.GetAssignmentListWithStudentId(studentId);
+        }
+
         public async Task<int> CreateAssignment(Assignment assignment)
         {
             return assignmentPersistencePort.CreateAssignment(assignment);

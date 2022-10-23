@@ -5,5 +5,7 @@ namespace OnlineExam.Application.PersistencePorts
     public interface IAssignmentPersistencePort
     {
         int CreateAssignment(Assignment assignment);
+
+        List<Assignment> GetAssignmentListWithStudentId(int studentId);
     }
 }

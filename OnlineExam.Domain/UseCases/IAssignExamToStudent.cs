@@ -5,6 +5,8 @@ namespace OnlineExam.Domain.UseCases
 {
     public interface IAssignExamToStudent : IUseCaseBase
     {
+        Task<List<Assignment>> ShowAssignmentBelongToStudent(int studentId);
+
         Task<int> CreateAssignment(Assignment assignment);
 
         void IsLinkValid(Assignment assignment);

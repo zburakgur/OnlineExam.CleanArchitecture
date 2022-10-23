@@ -8,6 +8,8 @@ namespace OnlineExam.Application.PersistencePorts
 
         bool CheckAdmin(Admin admin);
 
-        int CreateStudent(Student student);     
+        int CreateStudent(Student student);
+
+        List<Student> GetStudentList();
     }
 }

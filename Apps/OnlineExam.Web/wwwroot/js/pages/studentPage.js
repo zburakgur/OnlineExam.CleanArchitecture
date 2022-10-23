@@ -7,49 +7,48 @@ const TableSettings = {
     filter: false,
 }
 
-const ExamTableHeaders = {
+const StudentTableHeaders = {
     id: { value: "Id", hidden: true },
-    code: "Code",
-    header: "Header",
-    questions: { value: "Questions", hidden: true }
+    name: "Name",
+    surname: "Surname"
 }
 
-const QuestionExamTableHeaders = {
+const AssignmentTableHeaders = {
     id: { value: "Id", hidden: true },
+    studentId: { value: "StudentId", hidden: true },
     examId: { value: "ExamId", hidden: true },
-    text: "Text",
-    a: "A",
-    b: "B",
-    c: "C",
-    d: "D",
-    trueAnswer: "TrueAnswer"
+    code: "Exam Code",
+    header: "Exam Header",
+    isCompleted: "IsCompleted",
+    score: "Score",
+    deadline: "Deadline"
 }
 
 $.fn.dataTable.moment('DD.MM.YYYY');
 
-var examTable = new Table("examTable", ExamTableHeaders, TableSettings);
-examTable.init();
+var studentTable = new Table("studentTable", StudentTableHeaders, TableSettings);
+studentTable.init();
 
-examTable.selectCallback(function () {
-    var selectedExam = examTable.getSelectedItem();
-    if (selectedExam == null)
+studentTable.selectCallback(function () {
+    var selectedStudent = studentTable.getSelectedItem();
+    if (selectedStudent == null)
         return;
 
-    loadQuestions(selectedExam);
+    loadAssignments(selectedStudent);
 });
 
-var questionTable = new Table("questionTable", QuestionExamTableHeaders, TableSettings);
-questionTable.init();
+var assignmentTable = new Table("assignmentTable", AssignmentTableHeaders, TableSettings);
+assignmentTable.init();
 
-var loadExamTable = function () {
+var loadStudentTable = function () {
     App.loading.start('#pageBody');
-    App.post('/Exams/GetExamList', {}, function (result) {
+    App.post('/Students/GetStudentList', {}, function (result) {
         if (result.success) {
 
             if (result.data.length == 0)
                 App.showMessage('warning', 'No record', '');
             else {
-                examTable.loadList(result.data);
+                studentTable.loadList(result.data);
             }
         }
         else
@@ -59,15 +58,15 @@ var loadExamTable = function () {
     false);
 }
 
-var loadQuestions = function (exam) {
+var loadAssignments = function (student) {
     App.loading.start('#pageBody');
-    App.post('/Exams/GetQuestionList', { examId: exam.id}, function (result) {
+    App.post('/Students/GetAssignmentList', { studentId: student.id }, function (result) {
         if (result.success) {
 
             if (result.data.length == 0)
                 App.showMessage('warning', 'No record', '');
             else {
-                questionTable.loadList(result.data);
+                assignmentTable.loadList(result.data);
             }
         }
         else
@@ -76,7 +75,8 @@ var loadQuestions = function (exam) {
     },
     false);
 }
+
 
 $(document).ready(function () {
-    loadExamTable();
+    loadStudentTable();
 });

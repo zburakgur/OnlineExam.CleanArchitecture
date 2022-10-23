@@ -13,6 +13,11 @@ namespace OnlineExam.Application.UseCases
             this.userEnrollemtPersistencePort = userEnrollemtPersistencePort;
         }
 
+        public async Task<List<Student>> ShowStudentList()
+        {
+            return userEnrollemtPersistencePort.GetStudentList();
+        }
+
         public async Task<bool> CheckAdmin(Admin admin)
         {
             userEnrollemtPersistencePort.SeedAdmin(new Admin()

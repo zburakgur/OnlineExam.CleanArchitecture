@@ -1,7 +1,28 @@
 ﻿@{
-    ViewData["Title"] = "Privacy Policy";
-    Layout = "_Layout";
+    ViewData["Title"] = "Students Page";
+    Layout = "~/Views/Shared/_Layout.cshtml";
 }
+
+@section styles{
+    
+}
+
 <h1>@ViewData["Title"]</h1>
 
-<p>Use this page to detail your site's privacy policy.</p>
+<div class="container">
+    <p>Use this page to manage students and their exam assignments.</p>
+    <div id="pageBody" class="portlet box col-md-12 col-md-offset-0">
+        <div class="portlet-body">            
+            <div class="table-responsive">
+                    <table id="studentTable" class="table table-striped table-bordered table-hover dataTable no-footer" role="grid" aria-describedby="sample_3_info"></table>
+            </div>
+            <div class="table-responsive">
+                    <table id="assignmentTable" class="table table-striped table-bordered table-hover dataTable no-footer" role="grid" aria-describedby="sample_3_info"></table>
+            </div>
+        </div>
+    </div>
+</div>
+
+@section scripts{        
+    <script src="~/js/pages/studentPage.js"></script>
+}

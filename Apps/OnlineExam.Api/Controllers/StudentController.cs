@@ -18,6 +18,26 @@ namespace OnlineExam.Api.Controllers
             this.userEnrollment = userEnrollment;
         }
 
+        [HttpGet]
+        [Route("GetStudentList")]
+        public async Task<JsonResult> GetStudentList()
+        {
+            ResponseData<List<Student>> response = new ResponseData<List<Student>>();
+
+            try
+            {
+                response.Data = await userEnrollment.ShowStudentList();
+                response.Success = true;
+            }
+            catch (Exception ex)
+            {
+                response.Success = false;
+                response.Message = ex.Message.ToString();
+            }
+
+            return new JsonResult(response);
+        }
+
         [HttpPost]
         [Route("Add")]
         public async Task<JsonResult> Add(CreateStudentCommand command)

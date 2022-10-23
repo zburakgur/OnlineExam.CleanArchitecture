@@ -47,5 +47,21 @@ namespace OnlineExam.Repository.Persistence
 
             return assignmentRepository.AddAsync(assignment).Result;
         }
+
+        public List<Assignment> GetAssignmentListWithStudentId(int studentId)
+        {
+            Student student = (from record in studentRepository.GetTable()
+                               where record.Id == studentId
+                               select record).FirstOrDefault();
+
+            if (student == default)
+                throw new ArgumentException("GetAssignmentListWithStudentId");
+
+            var result = (from record in assignmentRepository.GetTable()
+                    where record.StudentId == studentId
+                    select record).ToList();
+
+            return result;
+        }
     }
 }
