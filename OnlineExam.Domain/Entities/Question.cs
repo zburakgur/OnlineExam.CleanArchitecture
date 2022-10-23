@@ -6,8 +6,6 @@ namespace OnlineExam.Domain.Entities
     {
         public int Id { get; set; }
 
-        public int ExamId { get; set; }
-
         public string Text { get; set; }
 
         public string A { get; set; }
@@ -18,6 +16,6 @@ namespace OnlineExam.Domain.Entities
 
         public string D { get; set; }
 
-        public string TrueAnswer { get; set; }
+        public string Answer { get; set; }
     }
 }

@@ -8,9 +8,9 @@ namespace OnlineExam.Application.UseCases
     {
         private readonly IExamEnrollmentPersistencePort examEnrollemtPersistencePort;
 
-        public async Task<List<Question>> ShowQuestionListBelongToExam(int examId)
+        public async Task<List<Question>> ShowQuestionListBelongToExam(string examCode, string path)
         {
-            return examEnrollemtPersistencePort.GetQuestionListWithExamId(examId);
+            return examEnrollemtPersistencePort.GetQuestionListWithExamId(examCode, path);
         }
 
         public ExamEnrollment(IExamEnrollmentPersistencePort examEnrollemtPersistencePort)
@@ -21,11 +21,6 @@ namespace OnlineExam.Application.UseCases
         public async Task<List<Exam>> ShowExamList()
         {
             return examEnrollemtPersistencePort.GetExamList();
-        }
-
-        public async Task<int> CreateExam(Exam exam)
-        {
-            return examEnrollemtPersistencePort.CreateExam(exam);
         }
 
         public async Task<Exam> GetExamWithId(int id)

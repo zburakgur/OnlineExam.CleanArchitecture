@@ -1,10 +1,10 @@
 ﻿using Infrastructure.Extensions;
 using Microsoft.AspNetCore.Mvc;
+using OnlineExam.Api.Settings;
 using OnlineExam.Application.Commands;
 using OnlineExam.Application.Responses;
 using OnlineExam.Domain.Entities;
 using OnlineExam.Domain.UseCases;
-using static Microsoft.EntityFrameworkCore.DbLoggerCategory.Database;
 
 namespace OnlineExam.Api.Controllers
 {
@@ -12,22 +12,24 @@ namespace OnlineExam.Api.Controllers
     public class ExamController : ControllerBase
     {
         private readonly IExamEnrollment examEnrollment;
+        private readonly QuestionsPath _questPath;
 
-        public ExamController(IExamEnrollment examEnrollment)
+        public ExamController(IExamEnrollment examEnrollment, QuestionsPath _questPath)
         {
             this.examEnrollment = examEnrollment;
+            this._questPath = _questPath;
         }
 
         [HttpGet]
         [Route("GetQuestionList")]
-        public async Task<JsonResult> GetQuestionList(int examId)
+        public async Task<JsonResult> GetQuestionList(string examCode)
         {
             ResponseData<List<Question>> response = new ResponseData<List<Question>>();
 
             try
-            {
+            {                
                 response.Success = true;
-                response.Data = await examEnrollment.ShowQuestionListBelongToExam(examId);
+                response.Data = await examEnrollment.ShowQuestionListBelongToExam(examCode, _questPath.Path);
             }
             catch (Exception ex)
             {
@@ -48,29 +50,6 @@ namespace OnlineExam.Api.Controllers
             {
                 response.Success = true;
                 response.Data = await examEnrollment.ShowExamList();
-            }
-            catch (Exception ex)
-            {
-                response.Success = false;
-                response.Message = ex.Message.ToString();
-            }
-
-            return new JsonResult(response);
-        }
-
-        [HttpPost]
-        [Route("Add")]
-        public async Task<JsonResult> Add(CreateExamCommand command)
-        {
-            ResponseData<Exam> response = new ResponseData<Exam>();
-
-            try
-            {
-                Exam exam = command.ToModel<CreateExamCommand, Exam>();
-                exam.Id = await examEnrollment.CreateExam(exam);
-
-                response.Success = true;
-                response.Data = exam;
             }
             catch (Exception ex)
             {

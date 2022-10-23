@@ -10,8 +10,7 @@ const TableSettings = {
 const ExamTableHeaders = {
     id: { value: "Id", hidden: true },
     code: "Code",
-    header: "Header",
-    questions: { value: "Questions", hidden: true }
+    header: "Header"
 }
 
 const QuestionExamTableHeaders = {
@@ -22,7 +21,7 @@ const QuestionExamTableHeaders = {
     b: "B",
     c: "C",
     d: "D",
-    trueAnswer: "TrueAnswer"
+    answer: "Answer"
 }
 
 $.fn.dataTable.moment('DD.MM.YYYY');
@@ -61,7 +60,7 @@ var loadExamTable = function () {
 
 var loadQuestions = function (exam) {
     App.loading.start('#pageBody');
-    App.post('/Exams/GetQuestionList', { examId: exam.id}, function (result) {
+    App.post('/Exams/GetQuestionList', { examCode: exam.code}, function (result) {
         if (result.success) {
 
             if (result.data.length == 0)

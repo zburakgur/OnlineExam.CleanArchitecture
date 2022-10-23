@@ -1,4 +1,5 @@
 ﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
+using OnlineExam.Api.Settings;
 using OnlineExam.Api.Tests.Framework;
 using OnlineExam.Application.UseCases;
 using OnlineExam.Domain.Entities;
@@ -15,70 +16,13 @@ namespace OnlineExam.Application.UseCases.Tests
     public class ExamEnrollmentTests : TestClassBase
     {
         private IExamEnrollment _testClass;
+        private QuestionsPath _questPath;
 
         [TestInitialize]
         public void SetUp()
         {
             _testClass = _serviceProvider.GetService<IExamEnrollment>();
-        }
-
-        [TestMethod()]
-        public void CreateExamTest()
-        {
-            Exam exam = new Exam()
-            {
-                Code = "Exam001",
-                Header = "Online Exam 001",
-                Questions = new List<Question> {
-                    new Question()
-                    {
-                        Text = "Test question 1",
-                        A = "Answer 1",
-                        B = "Answer 2",
-                        C = "Answer 3",
-                        D = "Answer 4",
-                        TrueAnswer = "B"
-                    },
-                    new Question()
-                    {
-                        Text = "Test question 2",
-                        A = "Answer 1",
-                        B = "Answer 2",
-                        C = "Answer 3",
-                        D = "Answer 4",
-                        TrueAnswer = "c"
-                    },
-                    new Question()
-                    {
-                        Text = "Test question 3",
-                        A = "Answer 1",
-                        B = "Answer 2",
-                        C = "Answer 3",
-                        D = "Answer 4",
-                        TrueAnswer = "B"
-                    },
-                    new Question()
-                    {
-                        Text = "Test question 4",
-                        A = "Answer 1",
-                        B = "Answer 2",
-                        C = "Answer 3",
-                        D = "Answer 4",
-                        TrueAnswer = "D"
-                    },
-                    new Question()
-                    {
-                        Text = "Test question 5",
-                        A = "Answer 1",
-                        B = "Answer 2",
-                        C = "Answer 3",
-                        D = "Answer 4",
-                        TrueAnswer = "A"
-                    }
-                }
-            };
-
-            Assert.AreNotEqual(_testClass.CreateExam(exam).Result, 0);
+            _questPath = _serviceProvider.GetService<QuestionsPath>();
         }
 
         [TestMethod()]
@@ -86,7 +30,6 @@ namespace OnlineExam.Application.UseCases.Tests
         {
             var result = _testClass.GetExamWithId(1).Result;
             Assert.AreNotEqual(result, default);
-            Assert.AreNotEqual(result.Questions.Count, 0);
         }
 
         [TestMethod()]
@@ -101,8 +44,8 @@ namespace OnlineExam.Application.UseCases.Tests
         [TestMethod()]
         public void ShowQuestionListBelongToExamTest()
         {
-            var m = _testClass.ShowQuestionListBelongToExam(1).Result;
-            Assert.AreNotEqual(_testClass.ShowQuestionListBelongToExam(1).Result.Count, 0);
+            string examCode = "EXAM_001";
+            Assert.AreNotEqual(_testClass.ShowQuestionListBelongToExam(examCode, _questPath.Path).Result.Count, 0);
         }
     }
 }
