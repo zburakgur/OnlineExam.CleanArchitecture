@@ -4,15 +4,11 @@ var App = function () {
 
     //// show loading in container
     var loading = {
-        start: function (target) {
-            Metronic.blockUI({
-                target: target,
-                message: 'Yükleniyor...',
-                boxed: true
-            });
+        start: function () {
+            $.blockUI()
         },
-        end: function (target) {
-            Metronic.unblockUI(target);
+        end: function () {
+            $.unblockUI();
         }
     }
 
@@ -82,7 +78,7 @@ var App = function () {
         showMessage: showMessage,
         /* init */
         init: function () {
-            Metronic.init(); // init metronic core components
+            //Metronic.init(); // init metronic core components
         }
     }
 
