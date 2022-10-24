@@ -1,6 +1,5 @@
-﻿using Infrastructure.DbContext.Base;
+﻿using Infrastructure.Base;
 using Infrastructure.Repository;
-using OnlineExam.Domain.Entities.Base;
 
 namespace OnlineExam.Repository
 {

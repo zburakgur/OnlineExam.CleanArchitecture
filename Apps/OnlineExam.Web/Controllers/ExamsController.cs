@@ -1,6 +1,5 @@
 ﻿using Infrastructure.Helpers;
 using Microsoft.AspNetCore.Mvc;
-using OnlineExam.Domain.Entities;
 using OnlineExam.Web.Models;
 
 namespace OnlineExam.Web.Controllers
@@ -22,17 +21,17 @@ namespace OnlineExam.Web.Controllers
 
         public async Task<JsonResult> GetExamList()
         {            
-            return Json(await httpHelper.GetAsync<ResponseData<List<Exam>>>($"Exam/GetExamList"));
+            return Json(await httpHelper.GetAsync<ResponseData<List<ExamResponse>>>($"Exam/GetExamList"));
         }
 
         public async Task<JsonResult> GetExamListAvailableForStudent(int studentId)
         {
-            return Json(await httpHelper.GetAsync<ResponseData<List<Exam>>>($"Exam/GetExamListAvailableForStudent?studentId={studentId}"));
+            return Json(await httpHelper.GetAsync<ResponseData<List<ExamResponse>>>($"Exam/GetExamListAvailableForStudent?studentId={studentId}"));
         }
 
         public async Task<JsonResult> GetQuestionList(string examCode)
         {            
-            return Json(await httpHelper.GetAsync<ResponseData<List<Question>>>($"Exam/GetQuestionList?examCode={examCode}"));
+            return Json(await httpHelper.GetAsync<ResponseData<List<QuestionResponse>>>($"Exam/GetQuestionList?examCode={examCode}"));
         }
     }
 }

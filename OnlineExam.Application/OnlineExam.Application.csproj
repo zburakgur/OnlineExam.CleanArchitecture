@@ -10,8 +10,4 @@
     <ProjectReference Include="..\OnlineExam.Domain\OnlineExam.Domain.csproj" />
   </ItemGroup>
 
-  <ItemGroup>
-    <Folder Include="Queries\" />
-  </ItemGroup>
-
 </Project>

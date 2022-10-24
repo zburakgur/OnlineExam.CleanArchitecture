@@ -1,8 +1,8 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using MediatR;
+using Microsoft.AspNetCore.Mvc;
 using OnlineExam.Api.Settings;
+using OnlineExam.Application.Queries;
 using OnlineExam.Application.Responses;
-using OnlineExam.Domain.Entities;
-using OnlineExam.Domain.UseCases;
 
 namespace OnlineExam.Api.Controllers
 {
@@ -10,16 +10,12 @@ namespace OnlineExam.Api.Controllers
     [Route("api/[controller]")]
     public class ExamController : ControllerBase
     {
-        private readonly IExamEnrollment examEnrollment;
-        private readonly IAssignExamToStudent assignExamToStudent;
+        private readonly IMediator _mediator;
         private readonly QuestionsPath _questPath;
 
-        public ExamController(IExamEnrollment examEnrollment,
-                              IAssignExamToStudent assignExamToStudent,
-                              QuestionsPath _questPath)
+        public ExamController(IMediator _mediator, QuestionsPath _questPath)
         {
-            this.examEnrollment = examEnrollment;
-            this.assignExamToStudent = assignExamToStudent;
+            this._mediator = _mediator;
             this._questPath = _questPath;
         }
 
@@ -27,12 +23,17 @@ namespace OnlineExam.Api.Controllers
         [Route("GetQuestionList")]
         public async Task<JsonResult> GetQuestionList(string examCode)
         {
-            ResponseData<List<Question>> response = new ResponseData<List<Question>>();
+            ResponseData<List<QuestionResponse>> response = new ResponseData<List<QuestionResponse>>();
 
             try
-            {                
+            {
+                var query = new GetQuestionListBelongToExamQuery();
+                query.ExamCode = examCode;
+                query.QuestionsPath = _questPath.Path;
+
+                response.Data = await _mediator.Send(query);
                 response.Success = true;
-                response.Data = await examEnrollment.ShowQuestionListBelongToExam(examCode, _questPath.Path);
+                
             }
             catch (Exception ex)
             {
@@ -47,12 +48,15 @@ namespace OnlineExam.Api.Controllers
         [Route("GetExamList")]
         public async Task<JsonResult> GetExamList()
         {
-            ResponseData<List<Exam>> response = new ResponseData<List<Exam>>();
+            ResponseData<List<ExamResponse>> response = new ResponseData<List<ExamResponse>>();
 
             try
             {
+                var query = new GetExamListQuery();
+                query.Path = _questPath.Path;
+
+                response.Data = await _mediator.Send(query);
                 response.Success = true;
-                response.Data = await examEnrollment.ShowExamList(_questPath.Path);
             }
             catch (Exception ex)
             {
@@ -67,12 +71,16 @@ namespace OnlineExam.Api.Controllers
         [Route("GetExamListAvailableForStudent")]
         public async Task<JsonResult> GetExamListAvailableForStudent(int studentId)
         {
-            ResponseData<List<Exam>> response = new ResponseData<List<Exam>>();
+            ResponseData<List<ExamResponse>> response = new ResponseData<List<ExamResponse>>();
 
             try
             {
+                var query = new GetExamListAvailableForStudentQuery();
+                query.StudentId = studentId;
+                query.Path = _questPath.Path;
+
+                response.Data = await _mediator.Send(query);
                 response.Success = true;
-                response.Data = await assignExamToStudent.ShowExamListForStudentAssignment(studentId, _questPath.Path);
             }
             catch (Exception ex)
             {

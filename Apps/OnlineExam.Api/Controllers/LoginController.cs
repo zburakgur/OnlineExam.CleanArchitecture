@@ -1,9 +1,7 @@
-﻿using Infrastructure.Extensions;
+﻿using MediatR;
 using Microsoft.AspNetCore.Mvc;
-using OnlineExam.Application.Commands;
+using OnlineExam.Application.Queries;
 using OnlineExam.Application.Responses;
-using OnlineExam.Domain.Entities;
-using OnlineExam.Domain.UseCases;
 
 namespace OnlineExam.Api.Controllers
 {
@@ -11,26 +9,23 @@ namespace OnlineExam.Api.Controllers
     [Route("api/[controller]")]
     public class LoginController : ControllerBase
     {
-        private readonly IUserEnrollment userEnrollment;
+        private readonly IMediator _mediator;
 
-        public LoginController(IUserEnrollment userEnrollment)
+        public LoginController(IMediator _mediator)
         {
-            this.userEnrollment = userEnrollment;
+            this._mediator = _mediator;
         }
 
         [HttpPost]
         [Route("Add")]
-        public async Task<JsonResult> Login(CheckLoginCommand command)
+        public async Task<JsonResult> Login(CheckLoginQuery query)
         {
-            ResponseData<bool> response = new ResponseData<bool>();
+            ResponseData<CheckLoginResponse> response = new ResponseData<CheckLoginResponse>();
 
             try
             {
-                Admin admin = command.ToModel<CheckLoginCommand, Admin>();
-                bool result = await userEnrollment.CheckAdmin(admin);
-
+                response.Data =  await _mediator.Send(query);
                 response.Success = true;
-                response.Data = result;
             }
             catch (Exception ex)
             {

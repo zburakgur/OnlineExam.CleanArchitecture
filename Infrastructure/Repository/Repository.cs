@@ -1,6 +1,6 @@
-﻿using Infrastructure.DbContext.Base;
+﻿using Infrastructure.Base;
+using Infrastructure.DbContext.Base;
 using Microsoft.EntityFrameworkCore;
-using OnlineExam.Domain.Entities.Base;
 
 namespace Infrastructure.Repository
 {

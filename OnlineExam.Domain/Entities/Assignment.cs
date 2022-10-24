@@ -1,4 +1,4 @@
-﻿using OnlineExam.Domain.Entities.Base;
+﻿using Infrastructure.Base;
 
 namespace OnlineExam.Domain.Entities
 {

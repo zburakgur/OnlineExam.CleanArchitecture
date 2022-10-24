@@ -13,13 +13,10 @@ const StudentTableHeaders = {
     surname: "Surname"
 }
 
-const AssignmentTableHeaders = {
-    id: { value: "Id", hidden: true },
-    studentId: { value: "StudentId", hidden: true },
+const AssignmentTableHeaders = {        
     examCode: "Exam Code",
     isCompleted: "IsCompleted",
-    score: "Score",
-    completedDate: { value: "CompletedDate", hidden: true },
+    score: "Score",    
     deadline: "Deadline"
 }
 

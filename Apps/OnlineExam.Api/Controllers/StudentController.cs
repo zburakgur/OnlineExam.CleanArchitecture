@@ -1,10 +1,8 @@
-﻿using AutoMapper;
-using Infrastructure.Extensions;
+﻿using MediatR;
 using Microsoft.AspNetCore.Mvc;
 using OnlineExam.Application.Commands;
+using OnlineExam.Application.Queries;
 using OnlineExam.Application.Responses;
-using OnlineExam.Domain.Entities;
-using OnlineExam.Domain.UseCases;
 
 namespace OnlineExam.Api.Controllers
 {
@@ -12,22 +10,23 @@ namespace OnlineExam.Api.Controllers
     [Route("api/[controller]")]
     public class StudentController : ControllerBase
     {
-        private readonly IUserEnrollment userEnrollment;
+        private readonly IMediator _mediator;
 
-        public StudentController(IUserEnrollment userEnrollment)
+        public StudentController(IMediator _mediator)
         {
-            this.userEnrollment = userEnrollment;
+            this._mediator = _mediator;
         }
 
         [HttpGet]
         [Route("GetStudentList")]
         public async Task<JsonResult> GetStudentList()
         {
-            ResponseData<List<Student>> response = new ResponseData<List<Student>>();
+            ResponseData<List<StudentResponse>> response = new ResponseData<List<StudentResponse>>();
 
             try
             {
-                response.Data = await userEnrollment.ShowStudentList();
+                var query = new GetStudentListQuery();
+                response.Data = await _mediator.Send(query);
                 response.Success = true;
             }
             catch (Exception ex)
@@ -43,15 +42,12 @@ namespace OnlineExam.Api.Controllers
         [Route("Add")]
         public async Task<JsonResult> Add(CreateStudentCommand command)
         {
-            ResponseData<Student> response = new ResponseData<Student>();
+            ResponseData<StudentResponse> response = new ResponseData<StudentResponse>();
 
             try
             {
-                Student student = command.ToModel<CreateStudentCommand, Student>();
-                student.Id = await userEnrollment.CreateStudent(student);
-
                 response.Success = true;
-                response.Data = student;
+                response.Data = await _mediator.Send(command);
             }
             catch(Exception ex)
             {

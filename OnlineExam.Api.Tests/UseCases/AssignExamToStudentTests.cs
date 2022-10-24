@@ -75,7 +75,7 @@ namespace OnlineExam.Application.UseCases.Tests
         [TestMethod()]
         public void ShowExamListForStudentAssignmentTest()
         {
-            Assert.AreEqual(_testClass.ShowExamListForStudentAssignment(2, _questPath.Path).Result.Count, 0);
+            Assert.AreEqual(_testClass.ShowExamListToAssignToStudent(2, _questPath.Path).Result.Count, 0);
         }
     }
 }

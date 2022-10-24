@@ -1,12 +1,9 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using MediatR;
+using OnlineExam.Application.Responses;
 
 namespace OnlineExam.Application.Commands
 {
-    public class CreateStudentCommand
+    public class CreateStudentCommand : IRequest<StudentResponse>
     {
         public string Name { get; set; }
 

@@ -1,6 +1,9 @@
-﻿namespace OnlineExam.Application.Commands
+﻿using MediatR;
+using OnlineExam.Application.Responses;
+
+namespace OnlineExam.Application.Commands
 {
-    public class CreateAssignmentCommand
+    public class CreateAssignmentCommand : IRequest<AssignmentResponse>
     {
         public int StudentId { get; set; }
 

@@ -1,6 +1,5 @@
 ﻿using Infrastructure.Helpers;
 using Microsoft.AspNetCore.Mvc;
-using OnlineExam.Domain.Entities;
 using OnlineExam.Web.Models;
 
 namespace OnlineExam.Web.Controllers
@@ -15,24 +14,24 @@ namespace OnlineExam.Web.Controllers
         }
 
         [HttpPost]
-        public async Task<JsonResult> Add(Student student)
+        public async Task<JsonResult> Add(CreateStudentCommand student)
         {
-            return Json(await httpHelper.Post<Student, ResponseData<Student>>($"Student/Add", student));
+            return Json(await httpHelper.Post<CreateStudentCommand, ResponseData<StudentResponse>>($"Student/Add", student));
         }
 
         public async Task<JsonResult> GetStudentList()
         {            
-            return Json(await httpHelper.GetAsync<ResponseData<List<Student>>>($"Student/GetStudentList"));
+            return Json(await httpHelper.GetAsync<ResponseData<List<StudentResponse>>>($"Student/GetStudentList"));
         }
 
         public async Task<JsonResult> GetAssignmentList(int studentId)
         {
-            return Json(await httpHelper.GetAsync<ResponseData<List<Assignment>>>($"Assignment/GetAssignmentList?studentId={studentId}"));
+            return Json(await httpHelper.GetAsync<ResponseData<List<AssignmentResponse>>>($"Assignment/GetAssignmentList?studentId={studentId}"));
         }
 
-        public async Task<JsonResult> Assign(Assignment assignment)
+        public async Task<JsonResult> Assign(CreateAssignmentCommand assignment)
         {
-            return Json(await httpHelper.Post<Assignment, ResponseData<Assignment>>($"Assignment/Assign", assignment));
+            return Json(await httpHelper.Post<CreateAssignmentCommand, ResponseData<AssignmentResponse>>($"Assignment/Assign", assignment));
         }
 
         public IActionResult Index()

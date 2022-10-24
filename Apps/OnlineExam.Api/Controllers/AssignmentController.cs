@@ -1,9 +1,8 @@
-﻿using Infrastructure.Extensions;
+﻿using MediatR;
 using Microsoft.AspNetCore.Mvc;
 using OnlineExam.Application.Commands;
+using OnlineExam.Application.Queries;
 using OnlineExam.Application.Responses;
-using OnlineExam.Domain.Entities;
-using OnlineExam.Domain.UseCases;
 
 namespace OnlineExam.Api.Controllers
 {
@@ -11,23 +10,26 @@ namespace OnlineExam.Api.Controllers
     [Route("api/[controller]")]
     public class AssignmentController : ControllerBase
     {
-        private readonly IAssignExamToStudent assignExamToStudent;
+        private readonly IMediator _mediator;
 
-        public AssignmentController(IAssignExamToStudent assignExamToStudent)
+        public AssignmentController(IMediator _mediator)
         {
-            this.assignExamToStudent = assignExamToStudent;
+            this._mediator = _mediator;
         }
 
         [HttpGet]
         [Route("GetAssignmentList")]
         public async Task<JsonResult> GetAssignmentList(int studentId)
         {
-            ResponseData<List<Assignment>> response = new ResponseData<List<Assignment>>();
+            ResponseData<List<AssignmentResponse>> response = new ResponseData<List<AssignmentResponse>>();
 
             try
-            {                
+            {
+                var query = new GetAssignmentListBelongToStudentQuery();
+                query.studentId = studentId;
+
+                response.Data = await _mediator.Send(query);
                 response.Success = true;
-                response.Data = await assignExamToStudent.ShowAssignmentBelongToStudent(studentId);
             }
             catch (Exception ex)
             {
@@ -42,15 +44,12 @@ namespace OnlineExam.Api.Controllers
         [Route("Assign")]
         public async Task<JsonResult> Assign(CreateAssignmentCommand command)
         {
-            ResponseData<Assignment> response = new ResponseData<Assignment>();
+            ResponseData<AssignmentResponse> response = new ResponseData<AssignmentResponse>();
 
             try
             {
-                Assignment assignment = command.ToModel<CreateAssignmentCommand, Assignment>();                
-                assignment.Id = await assignExamToStudent.CreateAssignment(assignment);
-
+                response.Data = await _mediator.Send(command);
                 response.Success = true;
-                response.Data = assignment;
             }
             catch (Exception ex)
             {
