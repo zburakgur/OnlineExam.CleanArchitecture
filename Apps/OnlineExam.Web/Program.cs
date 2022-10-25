@@ -44,7 +44,7 @@ app.UseEndpoints(endpoints =>
 {
     endpoints.MapControllerRoute(
         name: "default",
-        pattern: "{controller=Exams}/{action=Index}");
+        pattern: "{controller=Login}/{action=Index}");
 });
 
 //app.MapRazorPages();

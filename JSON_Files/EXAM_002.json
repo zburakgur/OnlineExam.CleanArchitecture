@@ -1,0 +1,92 @@
+[
+	{
+		"Id": 1,
+		"Text": "---- children can be easy targets for exploitation and victimization, supervision is a necessary component of any Internet safety.",
+		"A": "Even if",
+		"B": "Although",
+		"C": "Since",
+		"D": "Before",
+		"Answer": "C"
+	},
+	{
+		"Id": 2,
+		"Text": "The conventional view of dinosaur origins holds that they were endowed with ---- superior speed, agility, metabolism and intelligence ---- as soon as they debuted they quickly spread across the globe.",
+		"A": "such / that",
+		"B": "either / or",
+		"C": "both / and",
+		"D": "whether / or",
+		"Answer": "A"
+	},
+	{
+		"Id": 3,
+		"Text": "Books continue to be a major medium for communicating scholarly works in the field of history, ---- many other social sciences, where journal articles are far more important.",
+		"A": "with the help of",
+		"B": "in contrast to",
+		"C": "due to",
+		"D": "such as",
+		"Answer": "B"
+	},
+	{
+		"Id": 4,
+		"Text": "Twenty-five hundred years ago, ancient Greek philosophers turned their highly sophisticated ---- away from the whims of the gods and toward questions of the natural world.",
+		"A": "inquiries",
+		"B": "fallacies",
+		"C": "incentives",
+		"D": "complaints",
+		"Answer": "A"
+	},
+	{
+		"Id": 5,
+		"Text": "The mission control experts cannot tell if the space junk is going to hit the space station or not, but they are sure that a ---- would knock a hole in the body and cause all air inside it to quickly escape into space.",
+		"A": "succession",
+		"B": "collision",
+		"C": "conversion",
+		"D": "fluctuation",
+		"Answer": "B"
+	},
+	{
+		"Id": 6,
+		"Text": "While newspapers have been in dramatic decline in much of the developed West, the industry is ---- and still growing in many of Asia’s booming cities.",
+		"A": "fragile",
+		"B": "profitable",
+		"C": "confidential",
+		"D": "peculiar",
+		"Answer": "B"
+	},
+	{
+		"Id": 7,
+		"Text": "As the DNA of two unrelated people only differs by about one in every 1,000 base pairs, humans show ---- little genetic diversity.",
+		"A": "remarkably",
+		"B": "elaborately",
+		"C": "ambiguously",
+		"D": "sufficiently",
+		"Answer": "A"
+	},
+	{
+		"Id": 8,
+		"Text": "Biologists have created a molecule that ---- the connections between brain cells, called neurons, acting exactly like the steel bars in reinforced concrete.",
+		"A": "penetrates",
+		"B": "overcomes",
+		"C": "implements",
+		"D": "fortifies",
+		"Answer": "D"
+	},
+	{
+		"Id": 9,
+		"Text": "Internet users are increasingly ---- cyberchondria, a mental condition in which easy access to information on medical issues causes increased feelings of anxiety over health.",
+		"A": "looking around for",
+		"B": "cutting down on",
+		"C": "coming down with",
+		"D": "getting away with",
+		"Answer": "C"
+	},
+	{
+		"Id": 10,
+		"Text": "A compound called ‘hyloins’ that can be found in the frog's lymph and skin glands increases the frog's brightness ---- around 20 percent ---- a full moon.",
+		"A": "by / during ",
+		"B": "in / under",
+		"C": "at / over",
+		"D": "to / along",
+		"Answer": "A"
+	}
+]
