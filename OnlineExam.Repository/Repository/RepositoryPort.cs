@@ -9,14 +9,17 @@ namespace OnlineExam.Repository.Repository
         private readonly IOnlineExamRepository<Admin, int> adminRepository;
         private readonly IOnlineExamRepository<Student, int> studentRepository;
         private readonly IOnlineExamRepository<Assignment, int> assignmentRepository;
+        private readonly IOnlineExamRepository<Answer, int> answerRepository;
 
         public RepositoryPort(IOnlineExamRepository<Admin, int> adminRepository,
                           IOnlineExamRepository<Student, int> studentRepository,
-                          IOnlineExamRepository<Assignment, int> assignmentRepository)
+                          IOnlineExamRepository<Assignment, int> assignmentRepository,
+                          IOnlineExamRepository<Answer, int> answerRepository)
         {
             this.adminRepository = adminRepository;
             this.studentRepository = studentRepository;
             this.assignmentRepository = assignmentRepository;
+            this.answerRepository = answerRepository;
         }
 
         public async Task<Admin> CheckAdmin(Admin admin)
@@ -27,6 +30,13 @@ namespace OnlineExam.Repository.Repository
             return (from record in adminRepository.GetTable()
                     where record.UserName == admin.UserName &&
                             record.Password == admin.Password
+                    select record).FirstOrDefault();
+        }
+
+        public async Task<Assignment> CheckAssignment(int assignmentId)
+        {
+            return (from record in assignmentRepository.GetTable()
+                    where record.Id == assignmentId
                     select record).FirstOrDefault();
         }
 
@@ -126,6 +136,18 @@ namespace OnlineExam.Repository.Repository
         {
             return (from record in studentRepository.GetTable()
                     select record).ToList();
+        }
+
+        public async Task<Student> GetStudentWithId(int studentId)
+        {
+            return (from record in studentRepository.GetTable()
+                    where record.Id == studentId
+                    select record).FirstOrDefault();
+        }
+
+        public async Task CreateAnswer(List<Answer> list)
+        {
+            await answerRepository.AddAsync(list);
         }
 
         public void SeedAdmin(Admin admin)

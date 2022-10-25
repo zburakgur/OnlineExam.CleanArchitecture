@@ -14,10 +14,13 @@ namespace OnlineExam.Application.Mapper
             CreateMap<Student, CreateStudentCommand>().ReverseMap();
             CreateMap<Assignment, AssignmentResponse>().ReverseMap();
             CreateMap<Assignment, CreateAssignmentCommand>().ReverseMap();
+            CreateMap<Assignment, CheckAssignmentResponse>().ReverseMap();
             CreateMap<Exam, ExamResponse>().ReverseMap();
             CreateMap<Question, QuestionResponse>().ReverseMap();
+            CreateMap<Question, QuestionInExamResponse>().ReverseMap();
             CreateMap<Admin, CheckLoginQuery>().ReverseMap();
             CreateMap<Admin, CheckLoginResponse>().ReverseMap();
+            CreateMap<Answer, CreateAnswerCommand>().ReverseMap();
         }
     }
 }

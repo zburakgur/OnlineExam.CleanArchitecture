@@ -1,5 +1,6 @@
 ﻿using Infrastructure.Helpers;
 using Microsoft.AspNetCore.Mvc;
+using OnlineExam.Web.Models;
 
 namespace OnlineExam.Web.Controllers
 {
@@ -12,9 +13,19 @@ namespace OnlineExam.Web.Controllers
             this.httpHelper = httpHelper;
         }
 
-        public IActionResult Index(int assignmentId)
+        public async Task<IActionResult> Index(int assignmentId)
         {
-            return View();
+            var response = await httpHelper.GetAsync<ResponseData<CheckAssignmentResponse>>($"Assignment/CheckAssignment?assignmentId={assignmentId}");
+            if (response.Data.Status == Enums.AssignmentStatus.OK)
+            {
+                ViewBag.Title = "";
+                ViewBag.Data = response.Data;
+                return View();
+            }
+            else
+            {
+                return View();
+            }
         }
     }
 }

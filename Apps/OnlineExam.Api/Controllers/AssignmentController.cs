@@ -1,5 +1,6 @@
 ﻿using MediatR;
 using Microsoft.AspNetCore.Mvc;
+using OnlineExam.Api.Settings;
 using OnlineExam.Application.Commands;
 using OnlineExam.Application.Queries;
 using OnlineExam.Application.Responses;
@@ -11,10 +12,36 @@ namespace OnlineExam.Api.Controllers
     public class AssignmentController : ControllerBase
     {
         private readonly IMediator _mediator;
+        private readonly QuestionsPath _questPath;
 
-        public AssignmentController(IMediator _mediator)
+        public AssignmentController(IMediator _mediator, QuestionsPath _questPath)
         {
             this._mediator = _mediator;
+            this._questPath = _questPath;
+        }
+
+        [HttpGet]
+        [Route("CheckAssignment")]
+        public async Task<JsonResult> CheckAssignment(int assignmentId)
+        {
+            ResponseData<CheckAssignmentResponse> response = new ResponseData<CheckAssignmentResponse>();
+
+            try
+            {
+                var query = new CheckAssignmentQuery();
+                query.AssignmentId = assignmentId;
+                query.Path = _questPath.Path;
+
+                response.Data = await _mediator.Send(query);
+                response.Success = true;
+            }
+            catch (Exception ex)
+            {
+                response.Success = false;
+                response.Message = ex.Message.ToString();
+            }
+
+            return new JsonResult(response);
         }
 
         [HttpGet]

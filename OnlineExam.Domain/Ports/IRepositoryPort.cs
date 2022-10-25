@@ -4,6 +4,8 @@ namespace OnlineExam.Domain.Ports
 {
     public interface IRepositoryPort
     {
+        Task<Assignment> CheckAssignment(int assignmentId);
+
         Task<int> CreateAssignment(Assignment assignment);
 
         Task<List<Assignment>> GetAssignmentListWithStudentId(int studentId);
@@ -21,5 +23,9 @@ namespace OnlineExam.Domain.Ports
         Task<int> CreateStudent(Student student);
 
         Task<List<Student>> GetStudentList();
+
+        Task<Student> GetStudentWithId(int studentId);
+
+        Task CreateAnswer(List<Answer> list);
     }
 }
