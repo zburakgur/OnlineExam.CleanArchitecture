@@ -23,6 +23,7 @@ namespace OnlineExam.Application.Handlers
         {
             Assignment assignment = await _repositoryPort.CheckAssignment(request.AssignmentId);
             var response = new CheckAssignmentResponse();
+            response.QuestionList = new List<QuestionInExamResponse>();
 
             if (assignment == default)
             {
@@ -44,6 +45,7 @@ namespace OnlineExam.Application.Handlers
 
             List<Question> questions = await _repositoryPort.GetQuestionListWithExamCode(assignment.ExamCode, request.Path);
             response = _mapper.Map<CheckAssignmentResponse>(assignment);
+            response.AssignmentId = assignment.Id;
             response.Status = AssignmentStatus.OK;
             response.QuestionList = _mapper.Map<List<QuestionInExamResponse>>(questions);
 

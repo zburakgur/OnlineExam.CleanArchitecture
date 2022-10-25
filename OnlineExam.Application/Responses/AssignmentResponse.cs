@@ -2,6 +2,8 @@
 {
     public class AssignmentResponse
     {
+        public int Id { get; set; }
+
         public string ExamCode { get; set; }
 
         public bool IsCompleted { get; set; }

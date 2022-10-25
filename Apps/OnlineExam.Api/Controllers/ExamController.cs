@@ -1,6 +1,7 @@
 ﻿using MediatR;
 using Microsoft.AspNetCore.Mvc;
 using OnlineExam.Api.Settings;
+using OnlineExam.Application.Commands;
 using OnlineExam.Application.Queries;
 using OnlineExam.Application.Responses;
 
@@ -80,6 +81,31 @@ namespace OnlineExam.Api.Controllers
                 query.Path = _questPath.Path;
 
                 response.Data = await _mediator.Send(query);
+                response.Success = true;
+            }
+            catch (Exception ex)
+            {
+                response.Success = false;
+                response.Message = ex.Message.ToString();
+            }
+
+            return new JsonResult(response);
+        }
+
+        [HttpPost]
+        [Route("CompleteExam")]
+        public async Task<JsonResult> CompleteExam(CompleteExamInput input)
+        {
+            ResponseData<CompleteExamResponse> response = new ResponseData<CompleteExamResponse>();
+
+            try
+            {
+                var command = new CompleteExamCommand();
+                command.Path = _questPath.Path;
+                command.AnswerList = input.AnswerList;
+                command.AssignmentId = input.AssignmentId;
+                
+                response.Data = await _mediator.Send(command);
                 response.Success = true;
             }
             catch (Exception ex)

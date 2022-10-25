@@ -1,4 +1,5 @@
-﻿@{
+﻿@using OnlineExam.Web.Enums
+@{
     ViewBag.Title = "Exam Page";
 }
 
@@ -40,35 +41,48 @@
         </nav>
     </header>
     <div class="container">
-        @foreach (var question in ViewBag.Data.QuestionList)
+        @if (ViewBag.Data.Status == AssignmentStatus.OK)
         {
-            <div id="question_@(question.Id)" class="container">
-                <p>@question.Id: @question.Text</p>
-                <div class="row">
-                    <div class="form-check">
-                      <input class="form-check-input" type="radio" id="question_@(question.Id)_answer_A" name="question_@(question.Id)_option">
-                      <label class="form-check-label" for="question_@(question.Id)_answer_A">A: @question.A</label>
-                    </div>
+            @foreach (var question in ViewBag.Data.QuestionList)
+            {
+                <div id="question_@(question.Id)" class="container">
+                    <p>@question.Id: @question.Text</p>
+                    <div class="row">
+                        <div class="form-check">
+                            <input class="form-check-input" type="radio" id="question_@(question.Id)_answer_A" name="question_@(question.Id)_option">
+                            <label class="form-check-label" for="question_@(question.Id)_answer_A">A: @question.A</label>
+                        </div>
 
-                    <div class="form-check">
-                        <input class="form-check-input" type="radio" id="question_@(question.Id)_answer_B" name="question_@(question.Id)_option">
-                        <label class="form-check-label" for="question_@(question.Id)_answer_B">B: @question.B</label>
-                    </div>
+                        <div class="form-check">
+                            <input class="form-check-input" type="radio" id="question_@(question.Id)_answer_B" name="question_@(question.Id)_option">
+                            <label class="form-check-label" for="question_@(question.Id)_answer_B">B: @question.B</label>
+                        </div>
 
-                    <div class="form-check">
-                      <input class="form-check-input" type="radio" id="question_@(question.Id)_answer_C" name="question_@(question.Id)_option">
-                      <label class="form-check-label" for="question_@(question.Id)_answer_C">C: @question.C</label>
-                    </div>
+                        <div class="form-check">
+                            <input class="form-check-input" type="radio" id="question_@(question.Id)_answer_C" name="question_@(question.Id)_option">
+                            <label class="form-check-label" for="question_@(question.Id)_answer_C">C: @question.C</label>
+                        </div>
 
-                    <div class="form-check">
-                        <input class="form-check-input" type="radio" id="question_@(question.Id)_answer_D" name="question_@(question.Id)_option">
-                        <label class="form-check-label" for="question_@(question.Id)_answer_D">D: @question.D</label>
+                        <div class="form-check">
+                            <input class="form-check-input" type="radio" id="question_@(question.Id)_answer_D" name="question_@(question.Id)_option">
+                            <label class="form-check-label" for="question_@(question.Id)_answer_D">D: @question.D</label>
+                        </div>
                     </div>
                 </div>
-            </div>
-            <br>
+                <br>
+            }
+            <button type="button" onclick="completeTheExam();" class="btn btn-primary">Complete the exam</button>
         }
-        <button type="button" onclick="completeTheExam();" class="btn btn-primary">Complete the exam</button>
+        else{
+            if (ViewBag.Data.Status == AssignmentStatus.DONE)
+            {
+                <p>This exam is already completed!</p>
+            }
+            else if (ViewBag.Data.Status == AssignmentStatus.EXPIRED)
+            {
+                <p>This exam is not completed on time!</p>
+            }
+        }
     </div>
 
     <script src="~/lib/jquery/dist/jquery.min.js"></script>
@@ -84,6 +98,7 @@
     <script src="~/js/pages/onlineExamPage.js"></script>
     <script>
         var questionListSize = @ViewBag.Data.QuestionList.Count;
+        var assignmentId = @ViewBag.Data.AssignmentId;
     </script>
 </body>
 </html>

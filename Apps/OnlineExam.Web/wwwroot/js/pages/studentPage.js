@@ -14,6 +14,7 @@ const StudentTableHeaders = {
 }
 
 const AssignmentTableHeaders = {        
+    id: "Id",
     examCode: "Exam Code",
     isCompleted: "IsCompleted",
     score: "Score",    
@@ -49,7 +50,7 @@ var loadStudentTable = function () {
         if (result.success) {
 
             if (result.data.length == 0)
-                App.showMessage('warning', 'No record', '');
+                App.showMessage('warning', 'There are no registered students, please add a student!', '');
             else {
                 studentTable.loadList(result.data);
             }
@@ -67,7 +68,7 @@ var loadAssignments = function (student) {
         if (result.success) {
 
             if (result.data.length == 0) {
-                App.showMessage('warning', 'No record', '');
+                App.showMessage('warning', 'There is no exam assigned to this student!', '');
                 assignmentTable.clearTable();
             }
             else {
@@ -139,7 +140,7 @@ var showModalForAddAssignment = function () {
         if (result.success) {
 
             if (result.data.length == 0) {
-                App.showMessage('warning', 'No record', '');
+                App.showMessage('warning', 'There are no exams available for this student!', '');
                 examTable.clearTable();
             }
             else {

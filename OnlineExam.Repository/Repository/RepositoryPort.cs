@@ -33,6 +33,11 @@ namespace OnlineExam.Repository.Repository
                     select record).FirstOrDefault();
         }
 
+        public async Task UpdateAssignment(Assignment assignment)
+        {
+            await assignmentRepository.UpdateAsync(assignment.Id, assignment);
+        }
+
         public async Task<Assignment> CheckAssignment(int assignmentId)
         {
             return (from record in assignmentRepository.GetTable()

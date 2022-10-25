@@ -6,6 +6,8 @@ namespace OnlineExam.Application.Responses
     {
         public AssignmentStatus Status { get; set; }
 
+        public int AssignmentId { get; set; }
+
         public string ExamCode { get; set; }
 
         public string StudentName { get; set; }

@@ -9,33 +9,41 @@ var completeTheExam = function () {
         }
 
         // radio id's last character is the option
-        answerList.push(selected[0].id.substr(selected[0].id.length - 1));
+        var answer = { QuestionId: i, Code:  selected[0].id.substr(selected[0].id.length - 1) };
+        answerList.push(answer);
     }
 
     $.confirm({
-        title: 'Are you sure to complete the exam?!',
-        content: 'Simple confirm!',
+        title: 'Are you sure to complete the exam?',
+        content: '',
         buttons: {
             confirm: function () {
                 sendAnswer(answerList);
             },
-            cancel: function () {
-                //$.alert('Canceled!');
-            }
+            cancel: function () {}
         }
     });
 }
 
 var sendAnswer = function (answerList) {
     App.loading.start('#pageBody');
-    App.post('/Students/GetStudentList', {}, function (result) {
-        if (result.success) {
 
-            if (result.data.length == 0)
-                App.showMessage('warning', 'No record', '');
-            else {
-                studentTable.loadList(result.data);
-            }
+    var model = {
+        AssignmentId: assignmentId,
+        AnswerList: answerList
+    }
+
+    App.post('/OnlineExam/CompleteExam', model, function (result) {
+        if (result.success) {
+            $.confirm({
+                title: 'Exam score is ' + result.data.score,
+                content: '',
+                buttons: {
+                    confirm: function () {
+                        location.reload();
+                    }
+                }
+            });            
         }
         else
             App.showMessage('error', 'Operation fail.(' + result.message + ')', 'Error');

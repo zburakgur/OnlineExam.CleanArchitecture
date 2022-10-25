@@ -44,7 +44,7 @@ app.UseEndpoints(endpoints =>
 {
     endpoints.MapControllerRoute(
         name: "default",
-        pattern: "{controller=OnlineExam}/{action=Index?assignmentId=1}");
+        pattern: "{controller=Exams}/{action=Index}");
 });
 
 //app.MapRazorPages();

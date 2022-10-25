@@ -43,7 +43,7 @@ var loadExamTable = function () {
         if (result.success) {
 
             if (result.data.length == 0)
-                App.showMessage('warning', 'No record', '');
+                App.showMessage('warning', 'Exam file not found!', '');
             else {
                 examTable.loadList(result.data);
             }
@@ -61,7 +61,7 @@ var loadQuestions = function (exam) {
         if (result.success) {
 
             if (result.data.length == 0)
-                App.showMessage('warning', 'No record', '');
+                App.showMessage('warning', 'Exam questions not found!', '');
             else {
                 questionTable.loadList(result.data);
             }

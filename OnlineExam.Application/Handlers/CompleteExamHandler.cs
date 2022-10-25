@@ -18,6 +18,21 @@ namespace OnlineExam.Application.Handlers
             this._mapper = _mapper;
         }
 
+        private int CalculateScore(List<Question> questionList, List<Answer> answerList)
+        {
+            int trueAnswer = 0;
+            for(int i=0; i<questionList.Count; i++)
+            {
+                Question question = questionList[i];
+                Answer answer = answerList[i];
+
+                if(question.Answer == answer.Code)
+                    trueAnswer++;
+            }
+
+            return trueAnswer * 100 / questionList.Count;
+        }
+
         public async Task<CompleteExamResponse> Handle(CompleteExamCommand request, CancellationToken cancellationToken)
         {
             List<Answer> answerList = _mapper.Map<List<Answer>>(request.AnswerList);
@@ -28,10 +43,15 @@ namespace OnlineExam.Application.Handlers
             Assignment assignment = await _repositoryPort.CheckAssignment(request.AssignmentId);
             List<Question> questionList = await _repositoryPort.GetQuestionListWithExamCode(assignment.ExamCode, request.Path);
 
+            var response = new CompleteExamResponse();
+            response.Score = CalculateScore(questionList, answerList);
 
+            assignment.Score = response.Score;
+            assignment.CompletedDate = DateTime.Now;
+            assignment.IsCompleted = true;
+            _repositoryPort.UpdateAssignment(assignment);
 
-
-            throw new NotImplementedException();
+            return response;
         }
     }
 }

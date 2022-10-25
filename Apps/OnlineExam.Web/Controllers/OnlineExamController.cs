@@ -13,19 +13,17 @@ namespace OnlineExam.Web.Controllers
             this.httpHelper = httpHelper;
         }
 
+        [HttpPost]
+        public async Task<JsonResult> CompleteExam(CompleteExamInput input)
+        {
+            return Json(await httpHelper.Post<CompleteExamInput, ResponseData<CompleteExamResponse>>($"Exam/CompleteExam", input));
+        }
+
         public async Task<IActionResult> Index(int assignmentId)
         {
             var response = await httpHelper.GetAsync<ResponseData<CheckAssignmentResponse>>($"Assignment/CheckAssignment?assignmentId={assignmentId}");
-            if (response.Data.Status == Enums.AssignmentStatus.OK)
-            {
-                ViewBag.Title = "";
-                ViewBag.Data = response.Data;
-                return View();
-            }
-            else
-            {
-                return View();
-            }
+            ViewBag.Data = response.Data;
+            return View();
         }
     }
 }

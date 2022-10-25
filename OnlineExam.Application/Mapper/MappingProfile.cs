@@ -21,6 +21,7 @@ namespace OnlineExam.Application.Mapper
             CreateMap<Admin, CheckLoginQuery>().ReverseMap();
             CreateMap<Admin, CheckLoginResponse>().ReverseMap();
             CreateMap<Answer, CreateAnswerCommand>().ReverseMap();
+            
         }
     }
 }
