@@ -83,3 +83,17 @@ var App = function () {
     }
 
 }();
+
+var logoutFunction = function () {
+    App.loading.start('#pageBody');
+    App.post('/Login/Logout', {}, function (result) {        
+        if (result.success) {
+            App.showMessage('success', 'Goodbye', '');
+            location.replace("..")
+        }
+        else
+            App.showMessage('error', 'Operation fail.(' + result.message + ')', 'Error');
+        App.loading.end('#pageBody');
+    },
+    false);
+}

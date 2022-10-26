@@ -4,7 +4,7 @@ using OnlineExam.Web.Models;
 
 namespace OnlineExam.Web.Controllers
 {
-    public class ExamsController : Controller
+    public class ExamsController : BaseController
     {
         private readonly HttpHelper httpHelper;
 

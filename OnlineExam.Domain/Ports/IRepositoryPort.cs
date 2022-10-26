@@ -18,7 +18,7 @@ namespace OnlineExam.Domain.Ports
 
         Task<List<Exam>> GetExamList(string path);
 
-        void SeedAdmin(Admin admin);
+        Task SeedAdmin(Admin admin);
 
         Task<Admin> CheckAdmin(Admin admin);
 

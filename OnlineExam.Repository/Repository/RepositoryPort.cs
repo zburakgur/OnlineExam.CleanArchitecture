@@ -155,7 +155,7 @@ namespace OnlineExam.Repository.Repository
             await answerRepository.AddAsync(list);
         }
 
-        public void SeedAdmin(Admin admin)
+        public async Task SeedAdmin(Admin admin)
         {
             Admin result = (from record in adminRepository.GetTable()
                             where record.UserName == admin.UserName &&
@@ -164,7 +164,7 @@ namespace OnlineExam.Repository.Repository
 
             if (result == default)
             {
-                adminRepository.AddAsync(admin);
+                await adminRepository.AddAsync(admin);
             }
         }
     }

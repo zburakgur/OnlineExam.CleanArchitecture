@@ -15,7 +15,7 @@ builder.Services.AddCors(options =>
 });
 builder.Services.AddControllersWithViews();
 builder.Services.AddHttpContextAccessor();
-//builder.Services.AddSession();
+builder.Services.AddSession();
 
 /* Settings */
 HttpSettings httpSettings = new HttpSettings();
@@ -36,7 +36,7 @@ if (!app.Environment.IsDevelopment())
 
 app.UseHttpsRedirection();
 app.UseStaticFiles();
-//app.UseSession();
+app.UseSession();
 app.UseCors("CorsPolicy");
 app.UseRouting();
 //app.UseAuthorization();
@@ -44,7 +44,7 @@ app.UseEndpoints(endpoints =>
 {
     endpoints.MapControllerRoute(
         name: "default",
-        pattern: "{controller=Login}/{action=Index}");
+        pattern: "{controller=Exams}/{action=Index}");
 });
 
 //app.MapRazorPages();

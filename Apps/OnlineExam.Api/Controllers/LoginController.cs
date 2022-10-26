@@ -17,8 +17,8 @@ namespace OnlineExam.Api.Controllers
         }
 
         [HttpPost]
-        [Route("Add")]
-        public async Task<JsonResult> Login(CheckLoginQuery query)
+        [Route("CheckLogin")]
+        public async Task<JsonResult> CheckLogin(CheckLoginQuery query)
         {
             ResponseData<CheckLoginResponse> response = new ResponseData<CheckLoginResponse>();
 

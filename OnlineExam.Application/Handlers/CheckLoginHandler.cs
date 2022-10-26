@@ -20,8 +20,15 @@ namespace OnlineExam.Application.Handlers
 
         public async Task<CheckLoginResponse> Handle(CheckLoginQuery request, CancellationToken cancellationToken)
         {
+            Admin seedAdmin = new Admin();
+            seedAdmin.UserName = "Admin";
+            seedAdmin.Password = "Admin";
+            seedAdmin.Name = "Admin Name";
+            seedAdmin.Surname = "Admin Surname";            
+            await _repositoryPort.SeedAdmin(seedAdmin);
+
             Admin admin = _mapper.Map<Admin>(request);
-            var tmp = _repositoryPort.CheckAdmin(admin);
+            var tmp = await _repositoryPort.CheckAdmin(admin);
 
             var response = _mapper.Map<CheckLoginResponse>(tmp);
             return response;
