@@ -1,7 +1,6 @@
 ﻿using Infrastructure.Auth;
 using Infrastructure.Helpers;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.AspNetCore.Mvc.ViewFeatures;
 using Newtonsoft.Json;
 using OnlineExam.Web.Models;
 

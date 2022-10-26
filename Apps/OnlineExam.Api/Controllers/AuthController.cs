@@ -1,11 +1,8 @@
-﻿using AutoMapper;
-using Infrastructure.Auth;
+﻿using Infrastructure.Auth;
 using MediatR;
 using Microsoft.AspNetCore.Mvc;
 using OnlineExam.Api.Settings;
 using OnlineExam.Application.Commands;
-using OnlineExam.Application.Queries;
-using OnlineExam.Application.Responses;
 
 namespace OnlineExam.Api.Controllers
 {

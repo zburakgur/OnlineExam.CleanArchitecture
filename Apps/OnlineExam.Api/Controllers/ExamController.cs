@@ -1,4 +1,5 @@
 ﻿using MediatR;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using OnlineExam.Api.Settings;
 using OnlineExam.Application.Commands;
@@ -9,6 +10,7 @@ namespace OnlineExam.Api.Controllers
 {
     [ApiController]
     [Route("api/[controller]")]
+    [Authorize]
     public class ExamController : ControllerBase
     {
         private readonly IMediator _mediator;
