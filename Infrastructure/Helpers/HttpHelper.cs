@@ -69,7 +69,7 @@ namespace Infrastructure.Helpers
             {
                 httpClient.BaseAddress = new Uri(httpSettings.ApiUri);
                 httpClient.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue(CONTENT_TYPE));
-                //httpClient.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", await GetToken());
+                httpClient.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", await GetToken());
             }
             catch (Exception ex)
             {

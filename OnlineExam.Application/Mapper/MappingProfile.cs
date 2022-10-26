@@ -1,4 +1,6 @@
 ﻿using AutoMapper;
+using Infrastructure.Auth;
+using Infrastructure.Jwt;
 using OnlineExam.Application.Commands;
 using OnlineExam.Application.Queries;
 using OnlineExam.Application.Responses;
@@ -21,7 +23,7 @@ namespace OnlineExam.Application.Mapper
             CreateMap<Admin, CheckLoginQuery>().ReverseMap();
             CreateMap<Admin, CheckLoginResponse>().ReverseMap();
             CreateMap<Answer, CreateAnswerCommand>().ReverseMap();
-            
+            CreateMap<TokenOutput, JsonWebToken>().ReverseMap();
         }
     }
 }

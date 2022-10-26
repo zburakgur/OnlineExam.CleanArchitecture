@@ -1,4 +1,5 @@
 ﻿using Infrastructure.Engine;
+using Infrastructure.Extensions;
 using OnlineExam.Api.Settings;
 
 namespace OnlineExam.Api
@@ -14,13 +15,18 @@ namespace OnlineExam.Api
             builder.Services.AddSwaggerGen();
 
             builder.Services.AddInfrastructure(builder.Configuration);
+            builder.Services.AddJwt(builder.Configuration);
 
             /* Settings */
             QuestionsPath questionsPath = new QuestionsPath();
             var settingSection = builder.Configuration.GetSection("QuestionsPath");
             settingSection.Bind(questionsPath);
             builder.Services.AddSingleton<QuestionsPath>(questionsPath);
-            
+
+            ApiSettings apiSettings = new ApiSettings();
+            var apiSettingSection = builder.Configuration.GetSection("ApiSettings");
+            apiSettingSection.Bind(apiSettings);
+            builder.Services.AddSingleton<ApiSettings>(apiSettings);
 
             return builder.Build();
         }
