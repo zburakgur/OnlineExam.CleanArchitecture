@@ -1,4 +1,6 @@
-﻿using Infrastructure.Helpers;
+﻿using System.Reflection;
+using FluentValidation;
+using Infrastructure.Helpers;
 using Infrastructure.Mapper;
 using MediatR;
 using Microsoft.Extensions.Configuration;
@@ -17,6 +19,7 @@ namespace Infrastructure.Engine
                 .ForEach(x => x.Configure(services));
 
             services.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies());
+            services.AddValidatorsFromAssembly(Assembly.GetExecutingAssembly());
             services.AddMediatR(AppDomain.CurrentDomain.GetAssemblies());
 
             CommonHelper.GetAllInstancesOf<IMapperConfigure>()?
