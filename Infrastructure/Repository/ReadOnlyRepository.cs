@@ -16,10 +16,7 @@ namespace Infrastructure.Repository
             => this.context = context;
 
         public IQueryable<T> GetTable()
-        {
-            Table = Table ?? context.Set<T>();
-            return Table;
-        }
+            => Table ??= context.Set<T>();
         
         private TransactionScope CreateNoLockTransaction()
         {
